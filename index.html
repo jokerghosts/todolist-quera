@@ -1,37 +1,59 @@
 <!doctype html>
-<html lang="en">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      @font-face {
+        font-family: "YekanBakh";
+        src: url("./src/assets/fonts/yekan-bakh-regular.woff") format("woff");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "YekanBakh";
+        src: url("./src/assets/fonts/yekan-bakh-bold.woff") format("woff");
+        font-weight: 700;
+      }
+    </style>
+
+    <style type="text/tailwindcss">
+      @theme {
+        --font-yekan: "YekanBakh", sans-serif;
+      }
+    </style>
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
     <title>To-Do List</title>
   </head>
-  <body>
+  <body class="font-yekan font-bold">
     <header>
-        <h2></h2>
-        <p></p>
+      <h2>تسک های امروز</h2>
+      <p></p>
     </header>
     <main></main>
     <aside>
-        <div>
-            <h2></h2>
-            <p></p>
-        </div>
-        <nav>
-            <ul>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ul>
-        </nav>
-        <div>
-            <section></section>
-            <section></section>
-        </div>
+      <div>
+        <h2></h2>
+        <p></p>
+      </div>
+      <nav>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </nav>
+      <div>
+        <section></section>
+        <section></section>
+      </div>
     </aside>
     <footer></footer>
   </body>
