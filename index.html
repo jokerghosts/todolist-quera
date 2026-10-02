@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fa" dir="rtl" class="dark">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -85,7 +85,7 @@
   <body
     class="min-h-screen font-yekan grid grid-cols-1 md:grid-cols-5 bg-background text-gray p-4 gap-4"
   >
-    <aside
+    <!-- <aside
       class="hidden md:flex md:flex-col p-4 gap-10 border rounded-8 self-stretch"
     >
       <div class="flex items-start gap-2">
@@ -138,11 +138,166 @@
         <section>theme dark and light</section>
         <section>log out</section>
       </div>
+    </aside> -->
+
+    <aside
+      class="hidden md:flex md:flex-col p-4 gap-10 rounded-8 self-stretch shadow-lg"
+    >
+      <div class="flex items-start gap-2">
+        <img
+          src="./src/assets/images/Ellipse 136.png"
+          class="rounded-full"
+          alt="profile_photo"
+        />
+        <div class="flex flex-col">
+          <h2 class="font-bold text-xl">سلام نام کاربر</h2>
+          <p class="text-sm text-gray font-bold">تاریخ به روز شمسی</p>
+        </div>
+      </div>
+      <nav>
+        <ul class="flex flex-col gap-10">
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/home.svg" alt="home-icon" />
+            <span class="text-gray font-bold">خانه</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/task-square.svg" alt="task-icon" />
+            <span class="text-gray font-bold">تسک ها</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/calendar.svg" alt="calendar-icon" />
+            <span class="text-gray font-bold">تقویم</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img
+              src="./src/assets/icons/arrange-square-2.svg"
+              alt="report-icon"
+            />
+            <span class="text-gray font-bold">گزارشات</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/setting.svg" alt="setting-icon" />
+            <span class="text-gray font-bold">تنظیمات</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/24-support.svg" alt="support" />
+            <span class="text-gray font-bold">پشتیبانی</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/profile.svg" alt="profile" />
+            <span class="text-gray font-bold">پروفایل</span>
+          </li>
+        </ul>
+      </nav>
+      <div class="mt-auto flex-col flex gap-10">
+        <div class="flex w-full rounded-12 bg-gray/20 p-1 mb-2">
+          <button
+            class="flex flex-1 items-center justify-center gap-2 rounded-8 bg-white p-2 cursor-pointer"
+          >
+            <img
+              src="./src/assets/icons/sun.svg"
+              alt="light mode"
+              class="w-5"
+            />
+            <span>روشن</span>
+          </button>
+          <button
+            class="flex flex-1 items-center justify-center gap-2 rounded-8 p-2 cursor-pointer"
+          >
+            <img
+              src="./src/assets/icons/moon.svg"
+              alt="dark mode"
+              class="w-5"
+            />
+            <span>تاریک</span>
+          </button>
+        </div>
+        <div class="h-0.5 w-full bg-gray/20"></div>
+        <div class="flex mt-2">
+          <img src="./src/assets/icons/logout.svg" alt="logout-icon" />
+          <p class="mr-2">خروج</p>
+        </div>
+      </div>
     </aside>
 
+    <div class="hidden">
+      <div>
+        <p>کوئرا لیست</p>
+        <img src="./src/assets/icons/xmark.svg" alt="Xmark" />
+      </div>
+      <nav>
+        <ul class="flex flex-col gap-4">
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/home.svg" alt="home-icon" />
+            <span class="text-gray font-bold">خانه</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/task-square.svg" alt="task-icon" />
+            <span class="text-gray font-bold">تسک ها</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/calendar.svg" alt="calendar-icon" />
+            <span class="text-gray font-bold">تقویم</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img
+              src="./src/assets/icons/arrange-square-2.svg"
+              alt="report-icon"
+            />
+            <span class="text-gray font-bold">گزارشات</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/setting.svg" alt="setting-icon" />
+            <span class="text-gray font-bold">تنظیمات</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/24-support.svg" alt="support" />
+            <span class="text-gray font-bold">پشتیبانی</span>
+          </li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/profile.svg" alt="profile" />
+            <span class="text-gray font-bold">پروفایل</span>
+          </li>
+        </ul>
+      </nav>
+      <div class="mt-auto">
+        <div class="flex w-full rounded-12 bg-gray-light p-1 mb-2">
+          <button
+            class="flex flex-1 items-center justify-center gap-2 rounded-8 p-2"
+          >
+            <img
+              src="./src/assets/icons/moon.svg"
+              alt="dark mode"
+              class="w-5"
+            />
+            <span>تاریک</span>
+          </button>
+
+          <button
+            class="flex flex-1 items-center justify-center gap-2 rounded-8 bg-white p-2"
+          >
+            <img
+              src="./src/assets/icons/sun.svg"
+              alt="light mode"
+              class="w-5"
+            />
+            <span>روشن</span>
+          </button>
+        </div>
+        <div class="h-0.5 w-full bg-gray-light"></div>
+        <div class="flex mt-2">
+          <img src="./src/assets/icons/logout.svg" alt="logout-icon" />
+          <p class="mr-2">خروج</p>
+        </div>
+      </div>
+    </div>
     <div
-      class="row-start-2 md:row-start-1 flex flex-col md:col-span-4 md:col-start-2 p-4 border self-stretch gap-4 items-stretch"
+      class="row-start-2 md:row-start-1 flex flex-col md:col-span-4 md:col-start-2 p-4 self-stretch gap-4 items-stretch"
     >
+      <div class="flex md:hidden">
+        <img src="./src/assets/icons/menu.svg" alt="" />
+        <p class="font-bold flex-1 text-center">کوئرا لیست</p>
+      </div>
       <header class="mx-auto flex w-full max-w-3xl flex-col">
         <h2 class="font-bold text-xl">تسک های امروز</h2>
         <p class="text-sm text-gray">3 تسک را باید انجام بدهید.</p>
@@ -166,7 +321,7 @@
           </button>
         </section>
         <section
-          class="overflow-hidden rounded-12 border border-gray-light/30 bg-background"
+          class="overflow-hidden shadow-lg rounded-12 border border-gray-light/30 bg-background"
           aria-label="اضافه کردن تسک جدید"
         >
           <form>
@@ -245,7 +400,7 @@
           </form>
         </section>
         <article
-          class="relative min-h-24 overflow-hidden rounded-12 border border-gray-light/30 bg-background px-6 py-5"
+          class="relative min-h-24 shadow-lg overflow-hidden rounded-12 border border-gray-light/30 bg-background px-6 py-5"
         >
           <span
             class="absolute inset-y-3 right-0 w-1 rounded-l-full bg-turquoise"
@@ -330,7 +485,7 @@
           </div>
         </article>
         <section
-          class="overflow-hidden rounded-12 border border-gray-light/30 bg-background"
+          class="overflow-hidden shadow-lg rounded-12 border border-gray-light/30 bg-background"
           aria-labelledby="task-details-title"
         >
           <div class="p-5">
@@ -403,7 +558,7 @@
           </header>
 
           <article
-            class="relative flex min-h-16 items-center gap-4 overflow-hidden rounded-12 border border-gray-light/30 bg-background px-6 py-4"
+            class="relative shadow-lg flex min-h-16 items-center gap-4 overflow-hidden rounded-12 border border-gray-light/30 bg-background px-6 py-4"
           >
             <span
               class="absolute inset-y-3 right-0 w-1 rounded-l-full bg-yellow"
@@ -438,8 +593,6 @@
           </article>
         </section>
       </main>
-      <!-- for mehdi  -->
-      <footer class="border">sgh</footer>
     </div>
   </body>
 </html>
