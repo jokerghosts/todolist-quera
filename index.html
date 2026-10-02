@@ -82,61 +82,75 @@
 
     <title>To-Do List</title>
   </head>
-  <body class="font-yekan grid grid-cols-1 md:grid-cols-5">
-    <header
-      class="row-start-2 md:row-start-1 flex flex-col md:col-span-4 md:col-start-2 items-start p-4"
+  <body
+    class="min-h-screen font-yekan grid grid-cols-1 md:grid-cols-5 bg-background p-4 gap-4"
+  >
+    <aside
+      class="hidden md:flex md:flex-col p-4 gap-10 border rounded-8 self-stretch"
     >
-      <h2 class="font-bold text-xl">تسک های امروز</h2>
-      <p class="text-sm">3 تسک را باید انجام بدهید.</p>
-    </header>
-    <!-- for mehdi -->
-    <main class="flex row-start-3 md:row-start-2 md:col-span-4"></main>
-    <!-- for mehdi  -->
-    <aside class="hidden md:flex md:flex-col p-4 ">
       <div class="flex items-start gap-2">
-        <img src="./src/assets/images/Ellipse 136.png" class="rounded-full" alt="profile_photo" />
+        <img
+          src="./src/assets/images/Ellipse 136.png"
+          class="rounded-full"
+          alt="profile_photo"
+        />
         <div class="flex flex-col">
           <h2 class="font-bold text-xl">سلام نام کاربر</h2>
-          <p class="text-sm">تاریخ به روز شمسی</p>
+          <p class="text-sm text-gray">تاریخ به روز شمسی</p>
         </div>
       </div>
       <nav>
-        <ul>
-          <li>
+        <ul class="flex flex-col gap-4">
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
             <img src="./src/assets/icons/home.svg" alt="home-icon" />
             <span>خانه</span>
           </li>
-          <li>
-            <img src="./src/assets/icons/list.svg" alt="list-icon" />
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/task-square.svg" alt="task-icon" />
             <span>تسک ها</span>
           </li>
-          <li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
             <img src="./src/assets/icons/calendar.svg" alt="calendar-icon" />
             <span>تقویم</span>
           </li>
-          <li>
-            <img src="./src/assets/icons/report.svg" alt="report-icon" />
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img
+              src="./src/assets/icons/arrange-square-2.svg"
+              alt="report-icon"
+            />
             <span>گزارشات</span>
           </li>
-          <li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
             <img src="./src/assets/icons/setting.svg" alt="setting-icon" />
             <span>تنظیمات</span>
           </li>
-          <li>
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
             <img src="./src/assets/icons/24-support.svg" alt="support" />
             <span>پشتیبانی</span>
           </li>
-          <li>
-            <img src="./src/assets/icons/Vector.svg" alt="profile" />
+          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
+            <img src="./src/assets/icons/profile.svg" alt="profile" />
             <span>پروفایل</span>
           </li>
         </ul>
       </nav>
-      <div>
-        <section></section>
-        <section></section>
+      <div class="justify-self-end">
+        <section>theme dark and light</section>
+        <section>log out</section>
       </div>
     </aside>
-    <footer></footer>
+
+    <div
+      class="row-start-2 md:row-start-1 flex flex-col md:col-span-4 md:col-start-2 p-4 border self-stretch gap-4 items-stretch"
+    >
+      <header class="border">
+        <h2 class="font-bold text-xl">تسک های امروز</h2>
+        <p class="text-sm text-gray">3 تسک را باید انجام بدهید.</p>
+      </header>
+      <!-- for mehdi -->
+      <main class="border">gsh</main>
+      <!-- for mehdi  -->
+      <footer class="border">sgh</footer>
+    </div>
   </body>
 </html>
