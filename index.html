@@ -180,7 +180,7 @@
           </p>
         </div>
       </div>
-      <nav>
+      <nav class="mt-6">
         <ul class="flex flex-col gap-10">
           <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
             <img
@@ -241,26 +241,27 @@
         </ul>
       </nav>
       <div class="mt-auto flex-col flex gap-10">
-        <div class="flex w-full rounded-12 bg-button-bg p-1 mb-2">
+        <div class="flex w-full min-w-0 rounded-12 bg-button-bg p-1 mb-2">
           <button
-            class="flex flex-1 items-center justify-center gap-2 rounded-8 bg-chosen-theme-bg p-2 cursor-pointer"
+            class="flex min-w-0 flex-1 items-center justify-center gap-1 rounded-8 bg-chosen-theme-bg p-2 cursor-pointer"
           >
             <img
               src="./src/assets/icons/sun.svg"
               alt="light mode"
-              class="w-5"
+              class="w-5 shrink-0"
             />
-            <span>روشن</span>
+            <span class="truncate">روشن</span>
           </button>
+
           <button
-            class="flex flex-1 items-center justify-center gap-2 rounded-8 p-2 cursor-pointer"
+            class="flex min-w-0 flex-1 items-center justify-center gap-2 rounded-8 p-2 cursor-pointer"
           >
             <img
               src="./src/assets/icons/moon.svg"
               alt="dark mode"
-              class="w-5"
+              class="w-5 shrink-0"
             />
-            <span>تاریک</span>
+            <span class="truncate">تاریک</span>
           </button>
         </div>
         <div class="h-0.5 w-full bg-gray/20"></div>
