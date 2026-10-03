@@ -19,6 +19,9 @@ module.exports = {
         "yellow-light": "var(--yellow-light)",
         "orange-light": "var(--orange-light)",
         "turquoise-light": "var(--turquoise-light)",
+
+          // aside colors down:
+        "profile-desc" : "var(--profile-desc)", 
       },
 
       borderRadius: {

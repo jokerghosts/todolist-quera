@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -40,6 +40,12 @@
         --color-orange-light: var(--orange-light);
         --color-turquoise-light: var(--turquoise-light);
 
+        /* aside color var added down */
+
+        --color-profile-desc: var(--profile-desc);
+
+        /* aside color var added up */
+
         --radius-8: 8px;
         --radius-12: 12px;
         --radius-16: 16px;
@@ -62,6 +68,9 @@
           --yellow-light: #ffefd6;
           --orange-light: #ffe2db;
           --turquoise-light: #c3fff1;
+
+          /* aside colors added  */
+          --profile-desc: #7d7d7f;
         }
         .dark {
           --background: #060c18;
@@ -75,6 +84,9 @@
           --yellow-light: #ffefd6;
           --orange-light: #ffe2db;
           --turquoise-light: #c3fff1;
+
+          /* aside colors added  */
+          --profile-desc: #848890;
         }
       }
     </style>
@@ -152,7 +164,9 @@
         />
         <div class="flex flex-col">
           <h2 class="font-bold text-xl">سلام، رویا</h2>
-          <p class="text-sm text-gray font-bold">امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲</p>
+          <p class="text-sm text-profile-desc font-bold">
+            امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲
+          </p>
         </div>
       </div>
       <nav>
@@ -307,12 +321,14 @@
         />
         <div class="flex flex-col">
           <h2 class="font-bold text-xl">سلام، رویا</h2>
-          <p class="text-sm text-gray font-bold">امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲</p>
+          <p class="text-sm text-profile-desc font-bold">
+            امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲
+          </p>
         </div>
       </div>
       <header class="mx-auto flex w-full max-w-3xl flex-col m-2">
         <h2 class="font-bold text-xl">تسک های امروز</h2>
-        <p class="text-sm text-gray">3 تسک را باید انجام بدهید.</p>
+        <p class="text-sm text-profile-desc">3 تسک را باید انجام بدهید.</p>
       </header>
       <main class="mx-auto flex w-full max-w-3xl flex-col gap-8">
         <section aria-label="افزودن تسک">
