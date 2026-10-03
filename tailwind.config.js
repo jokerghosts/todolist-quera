@@ -20,8 +20,12 @@ module.exports = {
         "orange-light": "var(--orange-light)",
         "turquoise-light": "var(--turquoise-light)",
 
-          // aside colors down:
-        "profile-desc" : "var(--profile-desc)", 
+        // aside colors down:
+        "profile-desc": "var(--profile-desc)",
+        "sidebar-bg": "var(--sidebar-bg)",
+        "button-bg": "var(--button-bg)",
+        "chosen-theme-bg": "var(--chosen-theme_button-bg)",
+        "menubar-bg" : "var(--menubar-bg)",
       },
 
       borderRadius: {
