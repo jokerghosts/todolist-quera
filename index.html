@@ -26,6 +26,7 @@
     </style>
 
     <style type="text/tailwindcss">
+      @custom-variant dark (&:where(.dark, .dark *));
       @theme {
         --color-background: var(--background);
         --color-blue: var(--blue);
@@ -47,6 +48,8 @@
         --color-button-bg: var(--button-bg);
         --color-chosen-theme-bg: var(--chosen-theme_button-bg);
         --color-menubar-bg: var(--menubar-bg);
+        --color-divider: var(--divider);
+        --color-overlay: var(--overlay);
 
         /* aside color var added up */
         --radius-8: 8px;
@@ -75,12 +78,14 @@
           /* aside colors added  */
           --profile-desc: #7d7d7f;
           --sidebar-bg: #ffffff;
-          --button-bg: #e1e0e5;
+          --button-bg: #f7f7f7;
           --chosen-theme_button-bg: #ffffff;
           --menubar-bg: #ffffff;
+          --divider: #e9e9e9;
+          --overlay: #989898;
         }
         .dark {
-          --background: #060c18;
+          --background: #04070e;
           --blue: #57a8ff;
           --gray: #ffffff;
           --gray-light: #afaeb2;
@@ -93,11 +98,16 @@
           --turquoise-light: #c3fff1;
 
           /* aside colors added  */
-          --profile-desc: #848890;
-          --sidebar-bg: #081226;
+          --profile-desc: #84888f;
+          --sidebar-bg: #091120;
           --button-bg: #0c1b31;
           --chosen-theme_button-bg: #002247;
           --menubar-bg: #091120;
+          --divider: #181d27;
+          --overlay: #04070e;
+        }
+        .dark aside img[src*="/icons/"] {
+          filter: brightness(0) invert(1);
         }
       }
     </style>
@@ -107,7 +117,7 @@
     <title>To-Do List</title>
   </head>
   <body
-    class="min-h-screen font-yekan grid grid-cols-1 md:grid-cols-5 bg-background text-gray gap-4"
+    class="min-h-screen font-yekan grid grid-cols-1 md:grid-cols-[272px_1fr] bg-background text-gray gap-4"
   >
     <!-- <aside
       class="hidden md:flex md:flex-col p-4 gap-10 border rounded-8 self-stretch"
@@ -165,9 +175,9 @@
     </aside> -->
 
     <aside
-      class="hidden md:flex md:flex-col md:sticky md:top-4 md:h-[calc(100vh-2rem)] md:overflow-y-auto p-4 gap-10 rounded-8 shadow-lg md:mt-4 mr-2 bg-sidebar-bg"
+      class="hidden md:fixed md:top-[34px] md:right-4 md:bottom-[34px] md:z-40 md:flex md:w-[272px] md:flex-col md:overflow-hidden rounded-16 bg-sidebar-bg p-4 shadow-card"
     >
-      <div class="flex items-start gap-2">
+      <div class="flex shrink-0 items-start gap-2">
         <img
           src="./src/assets/images/Ellipse 136.png"
           class="rounded-full w-12"
@@ -180,10 +190,10 @@
           </p>
         </div>
       </div>
-      <nav class="mt-2">
-        <ul class="flex flex-col gap-5">
+      <nav class="mt-12 min-h-0 flex-1 overflow-y-auto">
+        <ul class="flex flex-col gap-2">
           <li
-            class="border-solid hover:bg-blue-light rounded-8 flex gap-4 hover:cursor-pointer items-center pt-3 pb-3 pr-5 pl-5"
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light"
           >
             <svg
               width="17"
@@ -194,14 +204,14 @@
             >
               <path
                 d="M15.0417 4.01478L10.2417 0.65645C8.93333 -0.260216 6.925 -0.210216 5.66667 0.764784L1.49167 4.02312C0.658333 4.67312 0 6.00645 0 7.05645V12.8065C0 14.9315 1.725 16.6648 3.85 16.6648H12.8333C14.9583 16.6648 16.6833 14.9398 16.6833 12.8148V7.16478C16.6833 6.03978 15.9583 4.65645 15.0417 4.01478ZM8.96667 13.3315C8.96667 13.6731 8.68333 13.9565 8.34167 13.9565C8 13.9565 7.71667 13.6731 7.71667 13.3315V10.8315C7.71667 10.4898 8 10.2065 8.34167 10.2065C8.68333 10.2065 8.96667 10.4898 8.96667 10.8315V13.3315Z"
-                fill="#007BFF"
+                fill="currentColor"
               />
             </svg>
 
-            <span class="font-bold text-blue">خانه</span>
+            <span class="font-bold">خانه</span>
           </li>
           <li
-            class="border-solid hover:bg-blue-light rounded-8 flex gap-4 hover:cursor-pointer items-center pt-3 pb-3 pr-5 pl-5 hover:text-blue text-gray"
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light"
           >
             <svg
               width="20"
@@ -250,7 +260,7 @@
             <span class="font-bold">تسک ها</span>
           </li>
           <li
-            class="border-solid hover:bg-blue-light rounded-8 flex gap-4 hover:cursor-pointer items-center pt-3 pb-3 pr-5 pl-5 hover:text-blue text-gray"
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light"
           >
             <svg
               width="20"
@@ -338,7 +348,7 @@
             <span class=" font-bold">تقویم</span>
           </li>
           <li
-            class="border-solid hover:bg-blue-light rounded-8 flex gap-4 hover:cursor-pointer items-center pt-3 pb-3 pr-5 pl-5 hover:text-blue text-gray"
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light"
           >
             <svg
               width="20"
@@ -398,7 +408,7 @@
             <span class=" font-bold">گزارشات</span>
           </li>
           <li
-            class="border-solid hover:bg-blue-light rounded-8 flex gap-4 hover:cursor-pointer items-center pt-3 pb-3 pr-5 pl-5 hover:text-blue text-gray"
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light"
           >
             <svg
               width="20"
@@ -426,7 +436,7 @@
             <span class=" font-bold">تنظیمات</span>
           </li>
           <li
-            class="border-solid hover:bg-blue-light rounded-8 flex gap-4 hover:cursor-pointer items-center pt-3 pb-3 pr-5 pl-5 hover:text-blue text-gray"
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light"
           >
             <svg
               width="20"
@@ -462,7 +472,7 @@
             <span class=" font-bold">پشتیبانی</span>
           </li>
           <li
-            class="border-solid hover:bg-blue-light rounded-8 flex gap-4 hover:cursor-pointer items-center pt-3 pb-3 pr-5 pl-5 hover:text-blue text-gray"
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light"
           >
             <svg
               width="20"
@@ -491,32 +501,32 @@
           </li>
         </ul>
       </nav>
-      <div class="mt-auto flex-col flex gap-6">
-        <div class="flex w-full min-w-0 rounded-12 bg-button-bg p-1 mb-2 mt6">
+      <div class="mt-auto flex w-full shrink-0 flex-col items-center justify-between gap-6">
+        <div class="mx-auto flex h-[42px] w-[209px] items-center gap-1 rounded-8 bg-button-bg p-1">
           <button
-            class="flex min-w-0 flex-1 items-center justify-center gap-1 rounded-8 bg-chosen-theme-bg p-2 cursor-pointer"
+            type="button" class="flex h-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-8 bg-chosen-theme-bg dark:bg-transparent"
           >
             <img
               src="./src/assets/icons/sun.svg"
               alt="light mode"
               class="w-5 shrink-0"
             />
-            <span class="truncate">روشن</span>
+            <span>روشن</span>
           </button>
 
           <button
-            class="flex min-w-0 flex-1 items-center justify-center gap-2 rounded-8 p-2 cursor-pointer"
+            type="button" class="flex h-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-8 dark:bg-chosen-theme-bg"
           >
             <img
               src="./src/assets/icons/moon.svg"
               alt="dark mode"
               class="w-5 shrink-0"
             />
-            <span class="truncate">تاریک</span>
+            <span>تاریک</span>
           </button>
         </div>
-        <div class="h-0.5 w-full bg-gray/20"></div>
-        <button class="flex mt-2 hover:cursor-pointer">
+        <div class="h-px w-[208px] bg-divider"></div>
+        <button type="button" class="flex w-[209px] cursor-pointer items-center gap-4 py-2">
           <svg
             width="20"
             height="20"
@@ -554,87 +564,78 @@
             </defs>
           </svg>
 
-          <p class="mr-2">خروج</p>
+          <p>خروج</p>
         </button>
       </div>
     </aside>
 
-    <div class="hidden">
-      <div>
-        <p>کوئرا لیست</p>
-        <img src="./src/assets/icons/xmark.svg" alt="Xmark" />
-      </div>
-      <nav>
-        <ul class="flex flex-col gap-4">
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/home.svg" alt="home-icon" />
-            <span class="text-gray font-bold">خانه</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/task-square.svg" alt="task-icon" />
-            <span class="text-gray font-bold">تسک ها</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/calendar.svg" alt="calendar-icon" />
-            <span class="text-gray font-bold">تقویم</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img
-              src="./src/assets/icons/arrange-square-2.svg"
-              alt="report-icon"
-            />
-            <span class="text-gray font-bold">گزارشات</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/setting.svg" alt="setting-icon" />
-            <span class="text-gray font-bold">تنظیمات</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/24-support.svg" alt="support" />
-            <span class="text-gray font-bold">پشتیبانی</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/profile.svg" alt="profile" />
-            <span class="text-gray font-bold">پروفایل</span>
-          </li>
-        </ul>
-      </nav>
-      <div class="mt-auto">
-        <div class="flex w-full rounded-12 bg-gray-light p-1 mb-2">
-          <button
-            class="flex flex-1 items-center justify-center gap-2 rounded-8 p-2"
-          >
-            <img
-              src="./src/assets/icons/moon.svg"
-              alt="dark mode"
-              class="w-5"
-            />
-            <span>تاریک</span>
+    <div class="fixed inset-0 z-50 md:hidden">
+      <div class="absolute inset-0 bg-overlay"></div>
+      <aside class="absolute inset-y-0 right-0 flex w-[274px] flex-col bg-sidebar-bg px-4 py-6">
+        <div class="relative flex h-8 shrink-0 items-center justify-center">
+          <button type="button" class="absolute left-0 p-1" aria-label="بستن">
+            <img src="./src/assets/icons/xmark.svg" alt="" class="h-5 w-5" />
           </button>
+          <p class="text-base font-bold">کوئرا لیست</p>
+        </div>
 
-          <button
-            class="flex flex-1 items-center justify-center gap-2 rounded-8 bg-white p-2"
-          >
-            <img
-              src="./src/assets/icons/sun.svg"
-              alt="light mode"
-              class="w-5"
-            />
-            <span>روشن</span>
+        <nav class="mt-12 min-h-0 flex-1 overflow-y-auto">
+          <ul class="flex flex-col gap-8">
+            <li class="flex h-11 items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light">
+              <img src="./src/assets/icons/home.svg" alt="" class="h-5 w-5" />
+              <span class="font-bold">خانه</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light">
+              <img src="./src/assets/icons/task-square.svg" alt="" class="h-5 w-5" />
+              <span class="font-bold">تسک ها</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light">
+              <img src="./src/assets/icons/calendar.svg" alt="" class="h-5 w-5" />
+              <span class="font-bold">تقویم</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light">
+              <img src="./src/assets/icons/arrange-square-2.svg" alt="" class="h-5 w-5" />
+              <span class="font-bold">گزارشات</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light">
+              <img src="./src/assets/icons/setting.svg" alt="" class="h-5 w-5" />
+              <span class="font-bold">تنظیمات</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light">
+              <img src="./src/assets/icons/24-support.svg" alt="" class="h-5 w-5" />
+              <span class="font-bold">پشتیبانی</span>
+            </li>
+            <li class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light">
+              <img src="./src/assets/icons/profile.svg" alt="" class="h-5 w-5" />
+              <span class="font-bold">پروفایل</span>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="mt-auto flex shrink-0 flex-col items-start">
+          <div class="flex h-10 w-[209px] self-center rounded-12 bg-button-bg p-1">
+            <button type="button" class="flex flex-1 items-center justify-center gap-2 rounded-8 bg-chosen-theme-bg text-sm dark:bg-transparent">
+              <img src="./src/assets/icons/sun.svg" alt="" class="h-5 w-5" />
+              <span>روشن</span>
+            </button>
+            <button type="button" class="flex flex-1 items-center justify-center gap-2 rounded-8 text-sm dark:bg-chosen-theme-bg">
+              <img src="./src/assets/icons/moon.svg" alt="" class="h-5 w-5" />
+              <span>تاریک</span>
+            </button>
+          </div>
+          <div class="mt-6 h-px w-[208px] self-center bg-divider"></div>
+          <button type="button" class="mt-8 flex items-center gap-2 px-5">
+            <img src="./src/assets/icons/logout.svg" alt="" class="h-5 w-5" />
+            <span>خروج</span>
           </button>
         </div>
-        <div class="h-0.5 w-full bg-gray-light"></div>
-        <div class="flex mt-2">
-          <img src="./src/assets/icons/logout.svg" alt="logout-icon" />
-          <p class="mr-2">خروج</p>
-        </div>
-      </div>
+      </aside>
     </div>
     <div
-      class="row-start-1 flex flex-col md:col-span-4 md:col-start-2 p-4 self-stretch gap-4 items-stretch"
+      class="row-start-1 flex flex-col md:col-start-2 p-4 self-stretch gap-4 items-stretch"
     >
       <div
-        class="flex md:hidden bg-menubar-bg mt-0 h-10 items-center shadow-card rounded-8 hover:cursor-pointer"
+        class="flex md:hidden bg-menubar-bg mt-0 h-10 items-center shadow-card rounded-8 cursor-pointer"
       >
         <svg
           width="24"
@@ -1052,5 +1053,5 @@
         </section>
       </main>
     </div>
-  </body>
+    </body>
 </html>
