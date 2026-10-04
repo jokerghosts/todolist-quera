@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fa" dir="rtl">
+<html lang="fa" dir="rtl" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,10 +21,12 @@
     <style type="text/tailwindcss">
       @theme {
         --font-yekan: "YekanBakh", sans-serif;
+        --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.06);
       }
     </style>
 
     <style type="text/tailwindcss">
+      @custom-variant dark (&:where(.dark, .dark *));
       @theme {
         --color-background: var(--background);
         --color-blue: var(--blue);
@@ -33,12 +35,23 @@
         --color-yellow: var(--yellow);
         --color-orange: var(--orange);
         --color-turquoise: var(--turquoise);
-
+        --color-blue2: var(--blue2);
         --color-blue-light: var(--blue-light);
         --color-yellow-light: var(--yellow-light);
         --color-orange-light: var(--orange-light);
         --color-turquoise-light: var(--turquoise-light);
 
+        /* aside color var added down */
+
+        --color-profile-desc: var(--profile-desc);
+        --color-sidebar-bg: var(--sidebar-bg);
+        --color-button-bg: var(--button-bg);
+        --color-chosen-theme-bg: var(--chosen-theme_button-bg);
+        --color-menubar-bg: var(--menubar-bg);
+        --color-divider: var(--divider);
+        --color-overlay: var(--overlay);
+
+        /* aside color var added up */
         --radius-8: 8px;
         --radius-12: 12px;
         --radius-16: 16px;
@@ -52,6 +65,7 @@
           /* light theme */
           --background: #ffffff;
           --blue: #007bff;
+          --blue2: #007bff;
           --gray: #525252;
           --gray-light: #afaeb2;
           --yellow: #ffaf37;
@@ -61,11 +75,21 @@
           --yellow-light: #ffefd6;
           --orange-light: #ffe2db;
           --turquoise-light: #c3fff1;
+
+          /* aside colors added  */
+          --profile-desc: #7d7d7f;
+          --sidebar-bg: #ffffff;
+          --button-bg: #f7f7f7;
+          --chosen-theme_button-bg: #ffffff;
+          --menubar-bg: #ffffff;
+          --divider: #e9e9e9;
+          --overlay: #989898;
         }
         .dark {
-          --background: #060c18;
+          --background: #04070e;
           --blue: #57a8ff;
           --gray: #ffffff;
+          --blue2: #041933;
           --gray-light: #afaeb2;
           --yellow: #ffaf37;
           --orange: #ff5f37;
@@ -74,6 +98,18 @@
           --yellow-light: #ffefd6;
           --orange-light: #ffe2db;
           --turquoise-light: #c3fff1;
+
+          /* aside colors added  */
+          --profile-desc: #84888f;
+          --sidebar-bg: #091120;
+          --button-bg: #0c1b31;
+          --chosen-theme_button-bg: #002247;
+          --menubar-bg: #091120;
+          --divider: #181d27;
+          --overlay: #04070e;
+        }
+        .dark aside img[src*="/icons/"] {
+          filter: brightness(0) invert(1);
         }
       }
     </style>
@@ -83,7 +119,7 @@
     <title>To-Do List</title>
   </head>
   <body
-    class="min-h-screen font-yekan grid grid-cols-1 md:grid-cols-5 bg-background text-gray p-4 gap-4"
+    class="min-h-screen font-yekan grid grid-cols-1 md:grid-cols-[272px_1fr] bg-background text-gray gap-4"
   >
     <!-- <aside
       class="hidden md:flex md:flex-col p-4 gap-10 border rounded-8 self-stretch"
@@ -141,172 +177,576 @@
     </aside> -->
 
     <aside
-      class="hidden md:flex md:flex-col p-4 gap-10 rounded-8 self-stretch shadow-lg"
+      class="hidden md:fixed md:top-[34px] md:right-4 md:bottom-[34px] md:z-40 md:flex md:w-[272px] md:flex-col md:overflow-hidden rounded-16 bg-sidebar-bg p-4 shadow-card"
     >
-      <div class="flex items-start gap-2">
+      <div class="flex shrink-0 items-start gap-2">
         <img
           src="./src/assets/images/Ellipse 136.png"
-          class="rounded-full"
+          class="rounded-full w-12"
           alt="profile_photo"
         />
         <div class="flex flex-col">
-          <h2 class="font-bold text-xl">سلام نام کاربر</h2>
-          <p class="text-sm text-gray font-bold">تاریخ به روز شمسی</p>
+          <h2 class="font-bold text-xl">سلام، رویا</h2>
+          <p class="text-sm text-profile-desc font-bold">
+            امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲
+          </p>
         </div>
       </div>
-      <nav>
-        <ul class="flex flex-col gap-10">
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/home.svg" alt="home-icon" />
-            <span class="text-gray font-bold">خانه</span>
+      <nav class="mt-12 min-h-0 flex-1 overflow-y-auto">
+        <ul class="flex flex-col gap-2">
+          <li
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+          >
+            <svg
+              width="17"
+              height="17"
+              viewBox="0 0 17 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.0417 4.01478L10.2417 0.65645C8.93333 -0.260216 6.925 -0.210216 5.66667 0.764784L1.49167 4.02312C0.658333 4.67312 0 6.00645 0 7.05645V12.8065C0 14.9315 1.725 16.6648 3.85 16.6648H12.8333C14.9583 16.6648 16.6833 14.9398 16.6833 12.8148V7.16478C16.6833 6.03978 15.9583 4.65645 15.0417 4.01478ZM8.96667 13.3315C8.96667 13.6731 8.68333 13.9565 8.34167 13.9565C8 13.9565 7.71667 13.6731 7.71667 13.3315V10.8315C7.71667 10.4898 8 10.2065 8.34167 10.2065C8.68333 10.2065 8.96667 10.4898 8.96667 10.8315V13.3315Z"
+                fill="currentColor"
+              />
+            </svg>
+
+            <span class="font-bold">خانه</span>
           </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/task-square.svg" alt="task-icon" />
-            <span class="text-gray font-bold">تسک ها</span>
+          <li
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.3086 7.40002H14.6836"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M5.31641 7.40002L5.94141 8.02502L7.81641 6.15002"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10.3086 13.2333H14.6836"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M5.31641 13.2333L5.94141 13.8583L7.81641 11.9833"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M7.49935 18.3334H12.4993C16.666 18.3334 18.3327 16.6667 18.3327 12.5V7.50002C18.3327 3.33335 16.666 1.66669 12.4993 1.66669H7.49935C3.33268 1.66669 1.66602 3.33335 1.66602 7.50002V12.5C1.66602 16.6667 3.33268 18.3334 7.49935 18.3334Z"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            <span class="font-bold">تسک ها</span>
           </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/calendar.svg" alt="calendar-icon" />
-            <span class="text-gray font-bold">تقویم</span>
+          <li
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.66699 1.66669V4.16669"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.333 1.66669V4.16669"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M2.91699 7.57501H17.0837"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M17.5 7.08335V14.1667C17.5 16.6667 16.25 18.3334 13.3333 18.3334H6.66667C3.75 18.3334 2.5 16.6667 2.5 14.1667V7.08335C2.5 4.58335 3.75 2.91669 6.66667 2.91669H13.3333C16.25 2.91669 17.5 4.58335 17.5 7.08335Z"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.0791 11.4167H13.0866"
+                stroke="currentColor"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.0791 13.9167H13.0866"
+                stroke="currentColor"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9.99607 11.4167H10.0036"
+                stroke="currentColor"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M9.99607 13.9167H10.0036"
+                stroke="currentColor"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6.91209 11.4167H6.91957"
+                stroke="currentColor"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M6.91209 13.9167H6.91957"
+                stroke="currentColor"
+                stroke-width="1.66667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            <span class="font-bold">تقویم</span>
           </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img
-              src="./src/assets/icons/arrange-square-2.svg"
-              alt="report-icon"
-            />
-            <span class="text-gray font-bold">گزارشات</span>
+          <li
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_82_7082)">
+                <path
+                  d="M7.49935 18.3334H12.4993C16.666 18.3334 18.3327 16.6667 18.3327 12.5V7.50002C18.3327 3.33335 16.666 1.66669 12.4993 1.66669H7.49935C3.33268 1.66669 1.66602 3.33335 1.66602 7.50002V12.5C1.66602 16.6667 3.33268 18.3334 7.49935 18.3334Z"
+                  stroke="currentColor"
+                  stroke-width="1.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8.48255 14.2916L5.94922 11.7583"
+                  stroke="currentColor"
+                  stroke-width="1.25"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M8.48242 5.70831V14.2916"
+                  stroke="currentColor"
+                  stroke-width="1.25"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M11.5176 5.70831L14.0509 8.24165"
+                  stroke="currentColor"
+                  stroke-width="1.25"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M11.5176 14.2916V5.70831"
+                  stroke="currentColor"
+                  stroke-width="1.25"
+                  stroke-miterlimit="10"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_82_7082">
+                  <rect width="20" height="20" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+
+            <span class="font-bold">گزارشات</span>
           </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/setting.svg" alt="setting-icon" />
-            <span class="text-gray font-bold">تنظیمات</span>
+          <li
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.5 7.59169V12.4C2.5 14.1667 2.5 14.1667 4.16667 15.2917L8.75 17.9417C9.44167 18.3417 10.5667 18.3417 11.25 17.9417L15.8333 15.2917C17.5 14.1667 17.5 14.1667 17.5 12.4084V7.59169C17.5 5.83336 17.5 5.83336 15.8333 4.70836L11.25 2.05836C10.5667 1.65836 9.44167 1.65836 8.75 2.05836L4.16667 4.70836C2.5 5.83336 2.5 5.83336 2.5 7.59169Z"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            <span class="font-bold">تنظیمات</span>
           </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/24-support.svg" alt="support" />
-            <span class="text-gray font-bold">پشتیبانی</span>
+          <li
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 15.7166H14.3667C13.7 15.7166 13.0667 15.975 12.6 16.4416L11.175 17.85C10.525 18.4917 9.46667 18.4917 8.81667 17.85L7.39166 16.4416C6.925 15.975 6.28333 15.7166 5.625 15.7166H5C3.61667 15.7166 2.5 14.6083 2.5 13.2417V4.14996C2.5 2.7833 3.61667 1.67499 5 1.67499H15C16.3833 1.67499 17.5 2.7833 17.5 4.14996V13.2417C17.5 14.6 16.3833 15.7166 15 15.7166Z"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M5.83301 7.63336C5.83301 6.85836 6.46634 6.22498 7.24134 6.22498C8.01634 6.22498 8.64968 6.85836 8.64968 7.63336C8.64968 9.20003 6.42467 9.36669 5.933 10.8584C5.833 11.1667 6.09134 11.475 6.41634 11.475H8.64968"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M13.3665 11.4667V6.70838C13.3665 6.49171 13.2248 6.3 13.0165 6.24166C12.8081 6.18333 12.5831 6.26666 12.4665 6.45C11.8665 7.41666 11.2165 8.51667 10.6498 9.48334C10.5581 9.64167 10.5581 9.85001 10.6498 10.0083C10.7415 10.1667 10.9165 10.2666 11.1081 10.2666H14.1665"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            <span class="font-bold">پشتیبانی</span>
           </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/profile.svg" alt="profile" />
-            <span class="text-gray font-bold">پروفایل</span>
+          <li
+            class="flex cursor-pointer items-center gap-4 rounded-8 px-5 py-2 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M10.1341 9.05835C10.0508 9.05002 9.95078 9.05002 9.85911 9.05835C7.87578 8.99169 6.30078 7.36669 6.30078 5.36669C6.30078 3.32502 7.95078 1.66669 10.0008 1.66669C12.0424 1.66669 13.7008 3.32502 13.7008 5.36669C13.6924 7.36669 12.1174 8.99169 10.1341 9.05835Z"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M5.96758 12.1333C3.95091 13.4833 3.95091 15.6833 5.96758 17.025C8.25924 18.5583 12.0176 18.5583 14.3092 17.025C16.3259 15.675 16.3259 13.475 14.3092 12.1333C12.0259 10.6083 8.26758 10.6083 5.96758 12.1333Z"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+
+            <span class="font-bold">پروفایل</span>
           </li>
         </ul>
       </nav>
-      <div class="mt-auto flex-col flex gap-10">
-        <div class="flex w-full rounded-12 bg-gray/20 p-1 mb-2">
+      <div
+        class="mt-auto flex w-full shrink-0 flex-col items-center justify-between gap-6"
+      >
+        <div
+          class="mx-auto flex h-[42px] w-[209px] items-center gap-1 rounded-8 bg-button-bg p-1"
+        >
           <button
-            class="flex flex-1 items-center justify-center gap-2 rounded-8 bg-white p-2 cursor-pointer"
+            type="button"
+            class="flex h-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-8 bg-chosen-theme-bg dark:bg-transparent"
           >
             <img
               src="./src/assets/icons/sun.svg"
               alt="light mode"
-              class="w-5"
+              class="w-5 shrink-0"
             />
             <span>روشن</span>
           </button>
+
           <button
-            class="flex flex-1 items-center justify-center gap-2 rounded-8 p-2 cursor-pointer"
+            type="button"
+            class="flex h-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-8 dark:bg-chosen-theme-bg"
           >
             <img
               src="./src/assets/icons/moon.svg"
               alt="dark mode"
-              class="w-5"
+              class="w-5 shrink-0"
             />
             <span>تاریک</span>
           </button>
         </div>
-        <div class="h-0.5 w-full bg-gray/20"></div>
-        <div class="flex mt-2">
-          <img src="./src/assets/icons/logout.svg" alt="logout-icon" />
-          <p class="mr-2">خروج</p>
-        </div>
+        <div class="h-px w-[208px] bg-divider"></div>
+        <button
+          type="button"
+          class="flex w-[209px] cursor-pointer items-center gap-4 py-2"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clip-path="url(#clip0_82_6940)">
+              <path
+                d="M7.41699 6.29995C7.67533 3.29995 9.21699 2.07495 12.592 2.07495H12.7003C16.4253 2.07495 17.917 3.56662 17.917 7.29162V12.725C17.917 16.45 16.4253 17.9416 12.7003 17.9416H12.592C9.24199 17.9416 7.70033 16.7333 7.42533 13.7833"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M12.4999 10H3.0166"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M4.87467 7.20837L2.08301 10L4.87467 12.7917"
+                stroke="currentColor"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </g>
+            <defs>
+              <clipPath id="clip0_82_6940">
+                <rect width="20" height="20" fill="white" />
+              </clipPath>
+            </defs>
+          </svg>
+
+          <p>خروج</p>
+        </button>
       </div>
     </aside>
 
-    <div class="hidden">
-      <div>
-        <p>کوئرا لیست</p>
-        <img src="./src/assets/icons/xmark.svg" alt="Xmark" />
-      </div>
-      <nav>
-        <ul class="flex flex-col gap-4">
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/home.svg" alt="home-icon" />
-            <span class="text-gray font-bold">خانه</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/task-square.svg" alt="task-icon" />
-            <span class="text-gray font-bold">تسک ها</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/calendar.svg" alt="calendar-icon" />
-            <span class="text-gray font-bold">تقویم</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img
-              src="./src/assets/icons/arrange-square-2.svg"
-              alt="report-icon"
-            />
-            <span class="text-gray font-bold">گزارشات</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/setting.svg" alt="setting-icon" />
-            <span class="text-gray font-bold">تنظیمات</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/24-support.svg" alt="support" />
-            <span class="text-gray font-bold">پشتیبانی</span>
-          </li>
-          <li class="border-solid hover:bg-blue-light rounded-8 flex gap-4">
-            <img src="./src/assets/icons/profile.svg" alt="profile" />
-            <span class="text-gray font-bold">پروفایل</span>
-          </li>
-        </ul>
-      </nav>
-      <div class="mt-auto">
-        <div class="flex w-full rounded-12 bg-gray-light p-1 mb-2">
-          <button
-            class="flex flex-1 items-center justify-center gap-2 rounded-8 p-2"
-          >
-            <img
-              src="./src/assets/icons/moon.svg"
-              alt="dark mode"
-              class="w-5"
-            />
-            <span>تاریک</span>
+    <div class="fixed inset-0 z-50 hidden md:hidden">
+      <div class="absolute inset-0 bg-overlay"></div>
+      <aside
+        class="absolute inset-y-0 right-0 flex w-[274px] flex-col bg-sidebar-bg px-4 py-6"
+      >
+        <div class="relative flex h-8 shrink-0 items-center justify-center">
+          <button type="button" class="absolute left-0 p-1" aria-label="بستن">
+            <img src="./src/assets/icons/xmark.svg" alt="" class="h-5 w-5" />
           </button>
+          <p class="text-base font-bold">کوئرا لیست</p>
+        </div>
 
-          <button
-            class="flex flex-1 items-center justify-center gap-2 rounded-8 bg-white p-2"
+        <nav class="mt-12 min-h-0 flex-1 overflow-y-auto">
+          <ul class="flex flex-col gap-8">
+            <li
+              class="flex h-11 items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+            >
+              <img src="./src/assets/icons/home.svg" alt="" class="h-5 w-5" />
+              <span class="font-bold">خانه</span>
+            </li>
+            <li
+              class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+            >
+              <img
+                src="./src/assets/icons/task-square.svg"
+                alt=""
+                class="h-5 w-5"
+              />
+              <span class="font-bold">تسک ها</span>
+            </li>
+            <li
+              class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+            >
+              <img
+                src="./src/assets/icons/calendar.svg"
+                alt=""
+                class="h-5 w-5"
+              />
+              <span class="font-bold">تقویم</span>
+            </li>
+            <li
+              class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+            >
+              <img
+                src="./src/assets/icons/arrange-square-2.svg"
+                alt=""
+                class="h-5 w-5"
+              />
+              <span class="font-bold">گزارشات</span>
+            </li>
+            <li
+              class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+            >
+              <img
+                src="./src/assets/icons/setting.svg"
+                alt=""
+                class="h-5 w-5"
+              />
+              <span class="font-bold">تنظیمات</span>
+            </li>
+            <li
+              class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+            >
+              <img
+                src="./src/assets/icons/24-support.svg"
+                alt=""
+                class="h-5 w-5"
+              />
+              <span class="font-bold">پشتیبانی</span>
+            </li>
+            <li
+              class="flex items-center gap-3 rounded-8 px-5 text-gray hover:bg-blue-light hover:text-blue dark:hover:text-gray"
+            >
+              <img
+                src="./src/assets/icons/profile.svg"
+                alt=""
+                class="h-5 w-5"
+              />
+              <span class="font-bold">پروفایل</span>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="mt-auto flex shrink-0 flex-col items-start">
+          <div
+            class="flex h-10 w-[209px] self-center rounded-12 bg-button-bg p-1"
           >
-            <img
-              src="./src/assets/icons/sun.svg"
-              alt="light mode"
-              class="w-5"
-            />
-            <span>روشن</span>
+            <button
+              type="button"
+              class="flex flex-1 items-center justify-center gap-2 rounded-8 bg-chosen-theme-bg text-sm dark:bg-transparent"
+            >
+              <img src="./src/assets/icons/sun.svg" alt="" class="h-5 w-5" />
+              <span>روشن</span>
+            </button>
+            <button
+              type="button"
+              class="flex flex-1 items-center justify-center gap-2 rounded-8 text-sm dark:bg-chosen-theme-bg"
+            >
+              <img src="./src/assets/icons/moon.svg" alt="" class="h-5 w-5" />
+              <span>تاریک</span>
+            </button>
+          </div>
+          <div class="mt-6 h-px w-[208px] self-center bg-divider"></div>
+          <button type="button" class="mt-8 flex items-center gap-2 px-5">
+            <img src="./src/assets/icons/logout.svg" alt="" class="h-5 w-5" />
+            <span>خروج</span>
           </button>
         </div>
-        <div class="h-0.5 w-full bg-gray-light"></div>
-        <div class="flex mt-2">
-          <img src="./src/assets/icons/logout.svg" alt="logout-icon" />
-          <p class="mr-2">خروج</p>
-        </div>
-      </div>
+      </aside>
     </div>
     <div
-      class="row-start-2 md:row-start-1 flex flex-col md:col-span-4 md:col-start-2 p-4 self-stretch gap-4 items-stretch"
+      class="row-start-1 flex flex-col md:col-start-2 p-4 self-stretch gap-4 items-stretch"
     >
-      <div class="flex md:hidden">
-        <img src="./src/assets/icons/menu.svg" alt="" />
+      <div
+        class="flex md:hidden bg-menubar-bg mt-0 h-10 items-center shadow-card rounded-8 cursor-pointer"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M3 7H21"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M3 12H21"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+          <path
+            d="M3 17H21"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
+
         <p class="font-bold flex-1 text-center">کوئرا لیست</p>
       </div>
-      <header class="mx-auto flex w-full max-w-3xl flex-col">
+      <div class="flex md:hidden items-start gap-2 m-2">
+        <img
+          src="./src/assets/images/Ellipse 136.png"
+          class="rounded-full w-12"
+          alt="profile_photo"
+        />
+        <div class="flex flex-col">
+          <h2 class="font-bold text-xl">سلام، رویا</h2>
+          <p class="text-sm text-profile-desc font-bold">
+            امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲
+          </p>
+        </div>
+      </div>
+      <header class="mx-auto flex w-full max-w-3xl flex-col m-2">
         <h2 class="font-bold text-xl">تسک های امروز</h2>
-        <p class="text-sm text-gray">3 تسک را باید انجام بدهید.</p>
+        <p class="text-sm text-profile-desc">3 تسک را باید انجام بدهید.</p>
       </header>
       <main class="mx-auto flex w-full max-w-3xl flex-col gap-8">
         <section aria-label="افزودن تسک">
           <button
             type="button"
-            class="flex min-h-12 w-full items-center justify-right gap-3 rounded-12 border border-dashed border-gray-light bg-background px-4 text-blue transition-colors hover:border-blue hover:bg-blue-light"
+            class="flex min-h-12 w-full items-center cursor-pointer justify-right gap-3 rounded-12 border border-dashed border-gray-light bg-background px-4 text-blue transition-colors hover:border-blue hover:bg-blue-light"
           >
             <img
               class="size-7"
@@ -317,7 +757,7 @@
               alt="آیکن افزودن"
             />
 
-            <span class="font-semibold">افزودن تسک جدید</span>
+            <span class="font-semibold">افزودن وظیفه جدید</span>
           </button>
         </section>
         <section
@@ -343,16 +783,26 @@
               <div class="mt-3">
                 <button
                   type="button"
-                  class="flex cursor-pointer items-center gap-2 rounded-8 border border-gray-light/30 px-3 py-2 text-sm text-gray-light transition-colors hover:border-blue"
+                  class="flex cursor-pointer items-center gap-2 rounded-8 border border-gray/30 px-3 py-2 text-sm text-gray transition-colors hover:border-blue"
                 >
-                  <img
+                  <svg
                     class="size-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
+                    viewBox="0 0 16 20"
                     aria-hidden="true"
-                    src="./src/assets/icons/tags.svg"
-                    alt=" تگ ها"
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="17"
+                    height="18"
+                  >
+                    <path
+                      d="M15.46 2.48v9.54c0 .56-.39 1.27-.88 1.57l-5.56 3.48c-.54.34-1.39.3-1.9-.08l-5.75-4.32c-.41-.3-.74-.97-.74-1.48V2.48C.63 1.02 2.23.14 3.47.91l3.69 2.31c.49.3 1.29.3 1.78 0L12.63.91c1.23-.77 2.83.12 2.83 1.57Z"
+                      fill="currentColor"
+                      stroke="currentColor"
+                      stroke-width="1.25"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+
                   <span>تگ‌ها</span>
                 </button>
 
@@ -388,11 +838,30 @@
             </div>
 
             <div
-              class="flex justify-end border-t border-gray-light/30 px-5 py-4"
+              class="flex justify-end border-t border-gray-light/30 gap-3 px-5 py-4"
             >
               <button
+                type="button"
+                aria-label="بستن فرم افزودن تسک"
+                class="grid md:hidden size-10 shrink-0 cursor-pointer place-items-center rounded-8 bg-blue2 text-white transition-colors hover:opacity-60 focus-visible:ring-2 focus-visible:ring-blue/30"
+              >
+                <svg
+                  class="size-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M6 6L18 18M18 6L6 18"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+              <button
                 type="submit"
-                class="cursor-pointer rounded-8 bg-blue px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-60"
+                class="cursor-pointer rounded-8 bg-blue2 px-5 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-60"
               >
                 اضافه کردن تسک
               </button>
@@ -400,7 +869,7 @@
           </form>
         </section>
         <article
-          class="relative min-h-24 shadow-lg overflow-hidden rounded-12 border border-gray-light/30 bg-background px-6 py-5"
+          class="relative min-h-24 bg-sidebar-bg shadow-lg overflow-visible rounded-12 border border-gray-light/30 bg-background px-4 py-5"
         >
           <span
             class="absolute inset-y-3 right-0 w-1 rounded-l-full bg-turquoise"
@@ -408,11 +877,34 @@
           ></span>
 
           <div class="flex items-start gap-4">
-            <input
-              type="checkbox"
-              aria-label="انجام‌شدن تماس با جمشید"
-              class="mt-1 size-5 shrink-0 cursor-pointer rounded border-gray-light accent-blue"
-            />
+            <label
+              class="relative inline-grid size-6 shrink-0 cursor-pointer place-items-center"
+            >
+              <input
+                type="checkbox"
+                aria-label="وضعیت انجام تسک"
+                class="peer sr-only"
+              />
+
+              <span
+                class="size-5 rounded-[6px] border-2 border-gray/60 bg-transparent transition-colors peer-checked:border-blue peer-checked:bg-blue peer-focus-visible:ring-2 peer-focus-visible:ring-blue/30 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background"
+              ></span>
+
+              <svg
+                class="pointer-events-none absolute size-3.5 text-white opacity-0 transition-opacity peer-checked:opacity-100"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 12.5L9.5 17L19 7.5"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </label>
 
             <div class="min-w-0 flex-1">
               <div class="flex flex-wrap items-center gap-3">
@@ -436,49 +928,67 @@
                 aria-label="گزینه‌های بیشتر"
                 class="grid size-8 place-items-center rounded-8 text-gray hover:bg-blue-light"
               >
-                <img
-                  class="size-4"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  aria-hidden="true"
-                  src="./src/assets/icons/3-point.svg"
-                  alt="گزینه های بیشتر"
-                />
+                <svg
+                  class="size-5"
+                  viewBox="0 0 4 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="2" cy="2" r="2" fill="currentcolor" />
+                  <circle cx="2" cy="9" r="2" fill="currentcolor" />
+                  <circle cx="2" cy="16" r="2" fill="currentcolor" />
+                </svg>
               </button>
 
               <div
-                class="flex items-center overflow-hidden rounded-8 border border-gray-light/30 bg-background shadow-lg"
+                class="absolute bg-sidebar-bg left-7 top-12 z-10 flex items-center overflow-hidden rounded-8 border border-gray-light/30 bg-background shadow-lg"
               >
                 <button
                   type="button"
-                  aria-label="ویرایش تسک"
-                  class="grid size-10 place-items-center transition-colors hover:bg-blue-light hover:text-blue cursor-pointer"
+                  aria-label="حذف تسک"
+                  class="grid size-10 place-items-center text-gray transition-colors hover:bg-orange/15 hover:text-orange cursor-pointer"
                 >
-                  <img
-                    class="size-5"
-                    viewBox="0 0 24 24"
+                  <svg
+                    class="size-6"
                     fill="none"
+                    viewBox="0 0 16 24"
                     aria-hidden="true"
-                    src="./src/assets/icons/edit.svg"
-                    alt="ویرایش تسک"
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                  >
+                    <path
+                      d="M.75 4.75h16m-15 0 1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12m-10 0v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3m-5 5 4 4m0-4-4 4"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </button>
-
                 <span class="h-6 w-px bg-gray-light/30"></span>
-
                 <button
                   type="button"
-                  aria-label="حذف تسک"
-                  class="grid size-10 place-items-center text-gray transition-colors hover:bg-orange-light hover:text-orange cursor-pointer"
+                  aria-label="ویرایش تسک"
+                  class="grid size-10 place-items-center text-gray transition-colors hover:bg-blue-light hover:text-blue cursor-pointer"
                 >
-                  <img
-                    class="size-5"
-                    viewBox="0 0 24 24"
+                  <svg
+                    class="size-6"
                     fill="none"
+                    viewBox="0 0 16 24"
                     aria-hidden="true"
-                    src="./src/assets/icons/ryc.svg"
-                    alt="ویرایش تسک"
-                  />
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                  >
+                    <path
+                      d="M3.75 4.75h-1a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1m-1-12 3 3m1.385-1.415a2.1 2.1 0 0 0-2.97-2.97L5.75 9.75v3h3Z"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>
@@ -499,20 +1009,28 @@
 
             <div class="mt-6">
               <span
-                class="inline-flex items-center gap-2 rounded-8 bg-turquoise/30 px-3 py-2 text-sm font-semibold text-turquoise"
+                class="inline-flex items-center gap-2 rounded-8 bg-turquoise/30 px-2 py-2 text-sm font-semibold text-turquoise"
               >
                 پایین
 
                 <button
                   type="button"
                   aria-label="حذف اولویت پایین"
-                  class="grid size-6 place-items-center text-gray transition-colors hover:text-orange cursor-pointer"
+                  class="grid size-4 place-items-center cursor-pointer"
                 >
-                  <img
-                    class="size-4 brightness-0 opacity-60 dark:invert"
-                    src="./src/assets/icons/zarn.svg"
-                    alt="آیکن حذف اولویت"
-                  />
+                  <svg
+                    class="size-6 text-turquoise"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="10"
+                    height="10"
+                    viewBox="0 4 12 20"
+                  >
+                    <path
+                      d="m6.66 13.33 6.67-6.66m0 6.66L6.66 6.67"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                    />
+                  </svg>
                 </button>
               </span>
             </div>
@@ -524,7 +1042,7 @@
           >
             <button
               type="button"
-              class="rounded-8 bg-blue px-5 py-2 font-semibold text-white transition-opacity hover:opacity-70 cursor-pointer"
+              class="rounded-8 bg-blue2 px-5 py-2 font-semibold text-white transition-opacity hover:opacity-60 cursor-pointer"
             >
               ویرایش تسک
             </button>
@@ -558,20 +1076,41 @@
           </header>
 
           <article
-            class="relative shadow-lg flex min-h-16 items-center gap-4 overflow-hidden rounded-12 border border-gray-light/30 bg-background px-6 py-4"
+            class="relative bg-sidebar-bg shadow-lg flex min-h-16 items-center gap-4 overflow-hidden rounded-12 border border-gray-light/30 bg-background px-4 py-4"
           >
             <span
               class="absolute inset-y-3 right-0 w-1 rounded-l-full bg-yellow"
               aria-hidden="true"
             ></span>
 
-            <input
-              type="checkbox"
-              checked
-              aria-label="تسک انجام شده"
-              class="size-5 shrink-0 cursor-pointer rounded border-gray-light accent-blue"
-            />
+            <label
+              class="relative inline-grid size-6 shrink-0 cursor-pointer place-items-center"
+            >
+              <input
+                type="checkbox"
+                aria-label="وضعیت انجام تسک"
+                class="peer sr-only"
+              />
 
+              <span
+                class="size-5 rounded-[6px] border-2 border-gray/60 bg-transparent transition-colors peer-checked:border-blue peer-checked:bg-blue peer-focus-visible:ring-2 peer-focus-visible:ring-blue/30 peer-focus-visible:ring-offset-2 peer-focus-visible:ring-offset-background"
+              ></span>
+
+              <svg
+                class="pointer-events-none absolute size-3.5 text-white opacity-0 transition-opacity peer-checked:opacity-100"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 12.5L9.5 17L19 7.5"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </label>
             <p class="min-w-0 flex-1 text-gray line-through">
               خرید میوه و سبزیجات و لبنیات برای خانه
             </p>
@@ -581,14 +1120,16 @@
               aria-label="گزینه‌های بیشتر"
               class="grid size-9 shrink-0 place-items-center rounded-8 text-gray transition-colors hover:bg-blue-light"
             >
-              <img
-                class="size-4"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-                src="./src/assets/icons/3-point.svg"
-                alt="گزینه های بیشتر"
-              />
+              <svg
+                class="size-5"
+                viewBox="0 0 4 22"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="2" cy="2" r="2" fill="currentcolor" />
+                <circle cx="2" cy="9" r="2" fill="currentcolor" />
+                <circle cx="2" cy="16" r="2" fill="currentcolor" />
+              </svg>
             </button>
           </article>
         </section>
