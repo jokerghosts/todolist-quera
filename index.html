@@ -4,29 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <style>
-      @font-face {
-        font-family: "YekanBakh";
-        src: url("./src/assets/fonts/yekan-bakh-regular.woff") format("woff");
-        font-weight: 400;
-      }
+    <link rel="stylesheet" href="./src/style/main.css" />
 
-      @font-face {
-        font-family: "YekanBakh";
-        src: url("./src/assets/fonts/yekan-bakh-bold.woff") format("woff");
-        font-weight: 700;
-      }
-    </style>
-
+    <!-- Tailwind CDN only reads inline text/tailwindcss blocks, so @theme stays here -->
     <style type="text/tailwindcss">
       @theme {
         --font-yekan: "YekanBakh", sans-serif;
         --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.06);
-      }
-    </style>
 
-    <style type="text/tailwindcss">
-      @theme {
         --color-background: var(--background);
         --color-blue: var(--blue);
         --color-gray: var(--gray);
@@ -56,49 +41,6 @@
         --font-weight-semibold: 600;
         --font-weight-bold: 700;
         --font-weight-extrabold: 800;
-      }
-      @layer base {
-        :root {
-          /* light theme */
-          --background: #ffffff;
-          --blue: #007bff;
-          --gray: #525252;
-          --gray-light: #afaeb2;
-          --yellow: #ffaf37;
-          --orange: #ff5f37;
-          --turquoise: #11a483;
-          --blue-light: #f5faff;
-          --yellow-light: #ffefd6;
-          --orange-light: #ffe2db;
-          --turquoise-light: #c3fff1;
-
-          /* aside colors added  */
-          --profile-desc: #7d7d7f;
-          --sidebar-bg: #ffffff;
-          --button-bg: #e1e0e5;
-          --chosen-theme_button-bg: #ffffff;
-          --menubar-bg: #ffffff;
-        }
-        .dark {
-          --background: #060c18;
-          --blue: #57a8ff;
-          --gray: #ffffff;
-          --gray-light: #afaeb2;
-          --yellow: #ffaf37;
-          --orange: #ff5f37;
-          --turquoise: #11a483;
-          --blue-light: #041933;
-          --yellow-light: #ffefd6;
-          --orange-light: #ffe2db;
-          --turquoise-light: #c3fff1;
-
-          /* aside colors added  */
-          --profile-desc: #848890;
-          --sidebar-bg: #091120;
-          --button-bg: #0c1b31;
-          --chosen-theme_button-bg: #002247;
-          --menubar-bg: #091120;
-        }
       }
     </style>
 
