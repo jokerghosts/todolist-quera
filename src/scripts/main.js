@@ -86,12 +86,13 @@ document.getElementById("today-date").textContent =
 const lightButton = document.getElementById("light-btn");
 const darkButton = document.getElementById("dark-btn");
 
-lightButton.addEventListener("click", () => setTheme("light"));
-darkButton.addEventListener("click", () => setTheme("dark"));
+lightButton.addEventListener("click", () => saveTheme("light"));
+darkButton.addEventListener("click", () => saveTheme("dark"));
 
-function setTheme(theme) {
+function saveTheme(themeMode) {
     const htmlElement = document.documentElement;
-    htmlElement.setAttribute("class", theme);
+    htmlElement.setAttribute("class", themeMode);
+    setData('theme', themeMode)
 }
 
 
@@ -101,7 +102,8 @@ function setData(key, value) {
 }
 
 function getData(key) {
-    localStorage.getItem(key);
+    const data = localStorage.getItem(key);
+    return data;
 }
 
 function removeData(key) {
@@ -110,4 +112,24 @@ function removeData(key) {
 
 function clearData() {
     localStorage.clear()
+}
+
+
+// note: on load
+loadTheme();
+
+function loadTheme() {
+    const themeMode = getData("theme");
+    saveTheme(themeMode)
+}
+
+loadTask();
+
+function loadTask() {
+    // todo: نیاز به تکمیل دارد
+}
+
+// note: save Data
+function saveTasks() {
+    // todo: نیاز به تکمیل دارد
 }
