@@ -93,3 +93,21 @@ function setTheme(theme) {
     const htmlElement = document.documentElement;
     htmlElement.setAttribute("class", theme);
 }
+
+
+// note: local storage
+function setData(key, value) {
+    localStorage.setItem(key, value);
+}
+
+function getData(key) {
+    localStorage.getItem(key);
+}
+
+function removeData(key) {
+    localStorage.removeItem(key);
+}
+
+function clearData() {
+    localStorage.clear()
+}
