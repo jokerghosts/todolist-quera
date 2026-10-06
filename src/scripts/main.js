@@ -61,3 +61,35 @@ function deleteTask(id) {
     saveTasks();
     renderTasks();
 }
+
+
+// note: datetime
+const date = new Date();
+
+const parts = new Intl.DateTimeFormat("fa-IR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+}).formatToParts(date);
+
+const weekday = parts.find(p => p.type === "weekday").value;
+const day = parts.find(p => p.type === "day").value;
+const month = parts.find(p => p.type === "month").value;
+const year = parts.find(p => p.type === "year").value;
+
+document.getElementById("today-date").textContent =
+    `امروز، ${weekday}، ${day} ${month} ${year}`;
+
+
+// note: theme mode
+const lightButton = document.getElementById("light-btn");
+const darkButton = document.getElementById("dark-btn");
+
+lightButton.addEventListener("click", () => setTheme("light"));
+darkButton.addEventListener("click", () => setTheme("dark"));
+
+function setTheme(theme) {
+    const htmlElement = document.documentElement;
+    htmlElement.setAttribute("class", theme);
+}
