@@ -1,8 +1,11 @@
 import { addTask } from "./createTask.js";
-
-document.getElementById("addTaskBtn").addEventListener("click", (e) => {
-  e.preventDefault();
-  const tasks = addTask();
-  console.log(tasks);
-});
-console.log("loading");
+import { renderTasks } from "./render.js";
+const form = document
+  .getElementById("taskForm")
+  .addEventListener("submit", (e) => {
+    e.preventDefault();
+    const tasks = addTask();
+    console.log(tasks);
+    renderTasks(tasks);
+    form.reset(); //clear the inputs
+  });
