@@ -51,9 +51,13 @@ function getData(key) {
     return data;
 }
 
+// info: جهت تست؛ فعلاً در پروژه استفاده نمی شود
 function removeData(key) {
     localStorage.removeItem(key);
 }
+
+// info: جهت تست؛ فعلاً در پروژه استفاده نمی شود
+// note: کل localStorage (حتی داده ی پروژه های دیگر روی localhost) را پاک می کند
 function clearData() {
     localStorage.clear()
 }
