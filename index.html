@@ -818,8 +818,8 @@
         <p id="todo-count" class="text-sm text-profile-desc">تسکی برای امروز نداری!</p>
     </header>
     <main class="mx-auto flex w-full max-w-3xl flex-col gap-8">
-        <!-- note: بالای صفحه؛ وقتی فرم باز است ارتفاعش ثابت می ماند تا تسک های انجام شده تکان نخورد -->
-        <div id="top-area" class="flex flex-col gap-8">
+        <!-- note: بالای صفحه؛ اگر تسکی نیست، فرم ساختن روی دکمه و عکس باز می شود (relative برای همین است) -->
+        <div id="top-area" class="relative flex flex-col gap-8">
         <section id="add-task-section" aria-label="افزودن تسک">
             <button
                     type="button"

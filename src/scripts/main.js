@@ -23,7 +23,6 @@ const doneList = document.getElementById("done-list");
 const todoCountText = document.getElementById("todo-count");
 const doneCountText = document.getElementById("done-count");
 const emptyState = document.getElementById("empty-state");
-const topArea = document.getElementById("top-area");
 const doneSection = document.getElementById("done-section");
 
 // note: بخش تگ ها (اولویت) در فرم
@@ -140,17 +139,6 @@ function openTaskForm(isEdit, task) {
         card.classList.add("hidden");
     } else {
         submitButton.textContent = "اضافه کردن تسک";
-
-        // note: اگر عکس «چه کارهایی امروز...» دیده می شود، ارتفاع بالای صفحه ثابت می ماند
-        // note: و عکس برداشته می شود، تا تسک های انجام شده تکان نخورد
-        if (!emptyState.classList.contains("hidden")) {
-            topArea.style.minHeight = topArea.offsetHeight + "px";
-            emptyState.classList.add("hidden");
-        }
-
-        // note: فقط موقع ساختن تسک، کل بخش دکمه ی افزودن مخفی می شود (فرم جای آن باز می شود)
-        // note: (فقط دکمه نه، وگرنه بخش خالی فاصله ی اضافه می سازد)
-        addTaskSection.classList.add("hidden");
     }
 
     updateSubmitButton();
@@ -158,6 +146,7 @@ function openTaskForm(isEdit, task) {
     // note: دکمه ی ضربدر برای بستن فرم بدون ثبت
     cancelButton.classList.remove("hidden");
     createTaskSection.classList.remove("hidden");
+    updateEmptyState();
     titleInput.focus();
 }
 
@@ -234,6 +223,46 @@ function sortTasks() {
     tasks.sort((a, b) => order[a.priority] - order[b.priority]);
 }
 
+// note: آیا فرم ساختن تسک (نه ویرایش) باز است؟
+function isCreateFormOpen() {
+    return !createTaskSection.classList.contains("hidden") && editingTaskId === null;
+}
+
+// note: وضعیت بالای صفحه: دکمه ی افزودن، عکس «چه کارهایی امروز...» و جای فرم ساختن
+// note: بعد از هر اتفاقی (تیک، حذف، ساختن، باز و بسته شدن فرم) صدا زده می شود
+function updateEmptyState() {
+    let hasTodo = false;
+    for (let i = 0; i < tasks.length; i++) {
+        if (!tasks[i].completed) {
+            hasTodo = true;
+        }
+    }
+
+    const formOpen = isCreateFormOpen();
+
+    // note: اول همه چیز به حالت عادی برمی گردد
+    addTaskSection.classList.remove("hidden", "invisible");
+    emptyState.classList.remove("hidden", "invisible");
+    createTaskSection.classList.remove("absolute", "inset-x-0", "top-0", "z-10");
+
+    if (hasTodo) {
+        // note: تسک هست: عکس لازم نیست
+        emptyState.classList.add("hidden");
+
+        // note: فرم ساختن جای دکمه ی افزودن باز می شود
+        if (formOpen) {
+            addTaskSection.classList.add("hidden");
+        }
+    } else if (formOpen) {
+        // note: تسکی نیست و فرم باز است:
+        // note: دکمه و عکس فقط نامرئی می شوند (جایشان می ماند) و فرم روی آن ها قرار می گیرد
+        // note: پس ارتفاع صفحه عوض نمی شود و تسک های انجام شده تکان نمی خورد
+        addTaskSection.classList.add("invisible");
+        emptyState.classList.add("invisible");
+        createTaskSection.classList.add("absolute", "inset-x-0", "top-0", "z-10");
+    }
+}
+
 // note: 18. تعداد تسک ها
 function updateTaskCount() {
     let todoCount = 0;
@@ -258,12 +287,7 @@ function updateTaskCount() {
     }
     doneCountText.textContent = `${doneNumber} تسک انجام شده است.`;
 
-    // note: اگر تسکی نبود عکس خالی را نشان بده
-    if (todoCount === 0) {
-        emptyState.classList.remove("hidden");
-    } else {
-        emptyState.classList.add("hidden");
-    }
+    updateEmptyState();
 
     // note: اگر تسک انجام شده ای نبود آن بخش را مخفی کن
     if (doneCount === 0) {
@@ -470,13 +494,8 @@ function closeEditTask() {
     updateSubmitButton();
     cancelButton.classList.add("hidden");
     createTaskSection.classList.add("hidden");
-    // note: بعد از بسته شدن فرم، دکمه ی افزودن دوباره نشان داده می شود
-    addTaskSection.classList.remove("hidden");
-    // note: ارتفاع بالای صفحه آزاد می شود و اگر تسکی نیست، عکس دوباره دیده می شود
-    topArea.style.minHeight = "";
-    if (todoList.children.length === 0) {
-        emptyState.classList.remove("hidden");
-    }
+    // note: وضعیت دکمه ی افزودن، عکس و جای فرم دوباره بررسی می شود
+    updateEmptyState();
 }
 
 // note: 27. آپدیت تسک
