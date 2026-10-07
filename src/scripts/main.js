@@ -54,7 +54,6 @@ function getData(key) {
 function removeData(key) {
     localStorage.removeItem(key);
 }
-
 function clearData() {
     localStorage.clear()
 }
@@ -117,19 +116,41 @@ function createTask() {
     closeEditTask();
 }
 
-// note: 12. باز و بسته کردن فرم ساختن تسک
-function toggleCreateTaskDropdown() {
-    // note: اگر وسط ویرایش بودیم، اول ویرایش بسته می شود
-    if (editingTaskId !== null) {
-        closeEditTask();
+// note: فرم مشترک ساختن و ویرایش تسک
+// note: isEdit = true یعنی ویرایش تسک، false یعنی ساختن تسک جدید
+function openTaskForm(isEdit, task) {
+    // note: اگر فرم قبلاً باز بود، اول بسته و خالی می شود
+    closeEditTask();
+
+    if (isEdit) {
+        editingTaskId = task.id;
+        titleInput.value = task.title;
+        descriptionInput.value = task.description;
+        selectPriority(task.priority);
+        submitButton.textContent = "ویرایش تسک";
+
+        // note: فرم دقیقاً جای کارت همان تسک قرار می گیرد و کارت مخفی می شود
+        const card = document.getElementById("task-" + task.id);
+        card.before(createTaskSection);
+        card.classList.add("hidden");
+    } else {
+        submitButton.textContent = "اضافه کردن تسک";
     }
+
+    updateSubmitButton();
 
     // note: وقتی فرم باز است، کل بخش دکمه ی افزودن مخفی می شود
     // note: (فقط دکمه نه، وگرنه بخش خالی فاصله ی اضافه می سازد)
     addTaskSection.classList.add("hidden");
-    createTaskSection.classList.toggle("hidden");
     // note: دکمه ی ضربدر برای بستن فرم بدون ثبت
     cancelButton.classList.remove("hidden");
+    createTaskSection.classList.remove("hidden");
+    titleInput.focus();
+}
+
+// note: 12. باز کردن فرم ساختن تسک (بالای لیست)
+function toggleCreateTaskDropdown() {
+    openTaskForm(false);
 }
 
 // note: دکمه ی ثبت تا وقتی عنوان خالیه غیرفعال می مونه
@@ -296,7 +317,7 @@ function createTaskCard(task) {
     }
 
     return `
-        <article class="${cardClass}">
+        <article id="task-${task.id}" class="${cardClass}">
             <span class="absolute inset-y-3 right-0 w-1 rounded-l-full bg-${color}"></span>
 
             <div class="flex items-start gap-4">
@@ -342,19 +363,35 @@ function createTaskCard(task) {
 
 // note: 20. نمایش تسک ها
 function renderTasks() {
+    // note: اگر فرم ویرایش داخل لیست باز بود، اول بسته می شود
+    // note: وگرنه با ساختن دوباره ی لیست، خود فرم هم پاک می شود
+    if (editingTaskId !== null) {
+        closeEditTask();
+    }
+
+    // note: تسک های انجام نشده بر اساس اولویت مرتب می شوند
     sortTasks();
 
     todoList.innerHTML = "";
     doneList.innerHTML = "";
 
+    const doneTasks = [];
+
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].completed) {
-            // note: 16. تسک های انجام شده
-            doneList.innerHTML += createTaskCard(tasks[i]);
+            doneTasks.push(tasks[i]);
         } else {
             // note: 17. تسک های انجام نشده
             todoList.innerHTML += createTaskCard(tasks[i]);
         }
+    }
+
+    // note: تسک های انجام شده بر اساس زمان انجام شدن (جدیدترین بالاتر)
+    doneTasks.sort((a, b) => (b.completedAt || 0) - (a.completedAt || 0));
+
+    for (let i = 0; i < doneTasks.length; i++) {
+        // note: 16. تسک های انجام شده
+        doneList.innerHTML += createTaskCard(doneTasks[i]);
     }
 
     // note: 34. آپدیت تعداد بعد از هر تغییر
@@ -370,6 +407,13 @@ function toggleTaskCompletion(id) {
         if (tasks[i].id === id) {
             // note: 30. عوض کردن وضعیت انجام شدن
             tasks[i].completed = !tasks[i].completed;
+
+            // note: زمان انجام شدن ذخیره می شود تا تسک های انجام شده با آن مرتب شوند
+            if (tasks[i].completed) {
+                tasks[i].completedAt = Date.now();
+            } else {
+                tasks[i].completedAt = null;
+            }
         }
     }
 
@@ -378,31 +422,31 @@ function toggleTaskCompletion(id) {
     renderTasks();
 }
 
-// note: 22. باز کردن ویرایش تسک
+// note: 22. باز کردن ویرایش تسک (جای همان تسک)
 function openEditTask(id) {
+    // note: منوی حذف و ویرایش بسته می شود
+    openDeleteAction(id);
+
     for (let i = 0; i < tasks.length; i++) {
         if (tasks[i].id === id) {
-            titleInput.value = tasks[i].title;
-            descriptionInput.value = tasks[i].description;
-            selectPriority(tasks[i].priority);
+            openTaskForm(true, tasks[i]);
+        }
+    }
+}
+
+// note: 23. بستن فرم (ساختن یا ویرایش)
+function closeEditTask() {
+    // note: اگر وسط ویرایش بودیم، کارت همان تسک دوباره نشان داده می شود
+    if (editingTaskId !== null) {
+        const card = document.getElementById("task-" + editingTaskId);
+        if (card) {
+            card.classList.remove("hidden");
         }
     }
 
-    editingTaskId = id;
-    submitButton.textContent = "ویرایش تسک";
-    updateSubmitButton();
-    cancelButton.classList.remove("hidden");
-    addTaskSection.classList.add("hidden");
-    createTaskSection.classList.remove("hidden");
-    openDeleteAction(id);
+    // note: فرم به جای اصلی خودش (بالای لیست) برمی گردد
+    addTaskSection.after(createTaskSection);
 
-    // note: فرم را نشان می دهد تا کاربر ببیند
-    taskForm.scrollIntoView({behavior: "smooth", block: "center"});
-    titleInput.focus();
-}
-
-// note: 23. بستن ویرایش تسک
-function closeEditTask() {
     editingTaskId = null;
     taskForm.reset();
     // note: اولویت پاک می شود و باکس اولویت ها بسته می شود
