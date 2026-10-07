@@ -562,7 +562,14 @@ taskForm.addEventListener("submit", function (event) {
 // note: باز و بسته کردن منوی موبایل
 function toggleMobileSidebar() {
     const sidebar = document.getElementById("mobile-sidebar");
-    sidebar.classList.toggle("hidden");
+    const overlay = document.getElementById("mobile-overlay");
+    const aside = document.getElementById("mobile-aside");
+
+    // note: سایدبار از سمت راست وارد یا خارج می شود و پس زمینه کم کم تیره یا روشن می شود
+    sidebar.classList.toggle("invisible");
+    overlay.classList.toggle("opacity-0");
+    overlay.classList.toggle("opacity-25");
+    aside.classList.toggle("translate-x-full");
 }
 
 // note: theme mode
