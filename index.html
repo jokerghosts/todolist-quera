@@ -67,11 +67,11 @@
     <div class="flex shrink-0 items-start gap-2 my-10 pr-4">
         <img
                 src="./src/assets/images/Ellipse 136.png"
-                class="rounded-full w-12"
+                class="rounded-full size-14"
                 alt="profile_photo"
         />
         <div class="flex flex-col">
-            <h2 class="font-bold text-xl">سلام، رویا</h2>
+            <h2 class="font-bold text-lg">سلام، رویا</h2>
             <p id="today-date" class="text-sm text-profile-desc font-bold">
                 امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲
             </p>
@@ -818,19 +818,19 @@
     <div class="flex md:hidden items-start gap-2 mt-3 mb-6">
         <img
                 src="./src/assets/images/Ellipse 136.png"
-                class="rounded-full w-12"
+                class="rounded-full size-14"
                 alt="profile_photo"
         />
         <div class="flex flex-col">
-            <h2 class="font-bold text-xl">سلام، رویا</h2>
+            <h2 class="font-bold text-lg">سلام، رویا</h2>
             <p id="today-date-mobile" class="text-sm text-profile-desc font-bold">
                 امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲
             </p>
         </div>
     </div>
     <header class="mx-auto flex w-full max-w-3xl flex-col m-2 md:mt-10">
-        <h2 class="font-bold text-xl">تسک های امروز</h2>
-        <p id="todo-count" class="text-sm text-profile-desc">تسکی برای امروز نداری!</p>
+        <h2 class="font-bold text-base md:text-xl">تسک های امروز</h2>
+        <p id="todo-count" class="text-xs text-profile-desc">تسکی برای امروز نداری!</p>
     </header>
     <main class="mx-auto flex w-full max-w-3xl flex-col gap-8">
         <!-- note: بالای صفحه؛ اگر تسکی نیست، فرم ساختن روی دکمه و عکس باز می شود (relative برای همین است) -->
@@ -875,7 +875,7 @@
                                     type="button"
                                     id="tags-btn"
                                     onclick="toggleTagsBox()"
-                                    class="flex w-fit cursor-pointer items-center gap-2 rounded-8 border border-gray-light/60 px-3 py-2 text-sm text-gray-light transition-colors hover:border-gray hover:text-gray"
+                                    class="flex w-fit cursor-pointer items-center gap-2 rounded-8 border border-gray-light/60 px-3 py-2 text-xs md:text-sm text-gray-light transition-colors hover:border-gray hover:text-gray"
                             >
                                 <svg id="tags-svg" class="size-4 -rotate-90 transition-transform" viewBox="0 0 16 20"
                                      aria-hidden="true">
@@ -902,7 +902,7 @@
                                         type="button"
                                         id="priority-low"
                                         onclick="selectPriority('low')"
-                                        class="cursor-pointer rounded-8 bg-turquoise-light px-4 py-1.5 text-xs font-semibold text-turquoise"
+                                        class="cursor-pointer rounded-8 bg-turquoise-light px-4 py-1.5 text-xs md:text-sm font-semibold text-turquoise"
                                 >
                                     پایین
                                 </button>
@@ -913,7 +913,7 @@
                                         type="button"
                                         id="priority-medium"
                                         onclick="selectPriority('medium')"
-                                        class="cursor-pointer rounded-8 bg-yellow/20 px-4 py-1.5 text-xs font-semibold text-yellow"
+                                        class="cursor-pointer rounded-8 bg-yellow/20 px-4 py-1.5 text-xs md:text-sm font-semibold text-yellow"
                                 >
                                     متوسط
                                 </button>
@@ -924,7 +924,7 @@
                                         type="button"
                                         id="priority-high"
                                         onclick="selectPriority('high')"
-                                        class="cursor-pointer rounded-8 bg-orange/20 px-4 py-1.5 text-xs font-semibold text-orange"
+                                        class="cursor-pointer rounded-8 bg-orange/20 px-4 py-1.5 text-xs md:text-sm font-semibold text-orange"
                                 >
                                     بالا
                                 </button>
@@ -969,7 +969,7 @@
                                 type="submit"
                                 id="task-form-submit"
                                 disabled
-                                class="cursor-pointer rounded-8 bg-submit-bg px-5 py-2.5 text-sm font-semibold text-white transition-opacity enabled:hover:opacity-60 disabled:cursor-not-allowed disabled:opacity-40"
+                                class="cursor-pointer rounded-8 bg-submit-bg px-5 py-2.5 text-xs md:text-sm font-semibold text-white transition-opacity enabled:hover:opacity-60 disabled:cursor-not-allowed disabled:opacity-40"
                         >
                             اضافه کردن تسک
                         </button>
@@ -1002,11 +1002,11 @@
         <!-- note: اول مخفی است؛ فقط وقتی تسک انجام شده باشد نمایش داده می شود -->
         <section id="done-section" class="hidden" aria-labelledby="completed-tasks-title">
             <header class="mb-5">
-                <h2 id="completed-tasks-title" class="text-xl font-bold text-gray">
+                <h2 id="completed-tasks-title" class="text-base md:text-xl font-bold text-gray">
                     تسک‌های انجام شده
                 </h2>
 
-                <p id="done-count" class="mt-2 text-sm text-profile-desc">۳ تسک انجام شده است.</p>
+                <p id="done-count" class="mt-2 text-xs text-profile-desc">۳ تسک انجام شده است.</p>
             </header>
 
             <div id="done-list" class="flex flex-col gap-4"></div>

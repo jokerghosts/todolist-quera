@@ -172,7 +172,7 @@ const priorityChipColors = {
     medium: "bg-yellow/20 text-yellow",
     low: "bg-turquoise-light text-turquoise"
 };
-const priorityChipClass = "flex w-fit items-center gap-2 rounded-8 px-3 py-1.5 text-xs font-semibold";
+const priorityChipClass = "flex w-fit items-center gap-2 rounded-8 px-3 py-1.5 text-xs md:text-sm font-semibold";
 
 // note: شکل آیکون تگ
 // note: باکس باز: آیکون پر و ایستاده / باکس بسته: آیکون توخالی و خوابیده (چرخش 90 درجه)
@@ -329,14 +329,14 @@ function createTaskCard(task) {
     const color = priority.color;
 
     let checked = "";
-    let titleClass = "text-lg font-semibold text-gray";
+    let titleClass = "text-sm md:text-base font-semibold text-gray";
     let moreClass = moreButtonClass;
 
     const badgeClass = `rounded-8 bg-${color}/20 px-3 py-1 text-xs font-semibold text-${color}`;
     let badge = `<span class="${badgeClass}">${priority.label}</span>`;
 
     // note: اگر توضیحات خالی بود، تگ p ساخته نمی شود
-    const descriptionClass = "mt-3 text-sm leading-7 text-profile-desc";
+    const descriptionClass = "mt-3 text-xs md:text-sm leading-6 md:leading-7 text-profile-desc";
     let description = "";
 
     if (task.description) {
@@ -346,7 +346,7 @@ function createTaskCard(task) {
     // note: تسک انجام شده خط می خورد و اولویت و توضیحات ندارد
     if (task.completed) {
         checked = "checked";
-        titleClass = "text-gray line-through";
+        titleClass = "text-sm md:text-base text-gray line-through";
         badge = "";
         description = "";
         // note: سه نقطه ی تسک انجام شده کم رنگ است
