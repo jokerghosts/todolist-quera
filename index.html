@@ -815,9 +815,11 @@
     </div>
     <header class="mx-auto flex w-full max-w-3xl flex-col m-2 md:mt-10">
         <h2 class="font-bold text-xl">تسک های امروز</h2>
-        <p id="todo-count" class="text-sm text-profile-desc">تسکی برای انجام وجود ندارد.</p>
+        <p id="todo-count" class="text-sm text-profile-desc">تسکی برای امروز نداری!</p>
     </header>
     <main class="mx-auto flex w-full max-w-3xl flex-col gap-8">
+        <!-- note: بالای صفحه؛ وقتی فرم باز است ارتفاعش ثابت می ماند تا تسک های انجام شده تکان نخورد -->
+        <div id="top-area" class="flex flex-col gap-8">
         <section id="add-task-section" aria-label="افزودن تسک">
             <button
                     type="button"
@@ -977,7 +979,10 @@
                 می‌تونی الان تسک‌هاتو اینجا بنویسی و برنامه‌ریزی رو شروع کنی!
             </p>
         </section>
-        <section id="done-section" aria-labelledby="completed-tasks-title">
+        </div>
+
+        <!-- note: اول مخفی است؛ فقط وقتی تسک انجام شده باشد نمایش داده می شود -->
+        <section id="done-section" class="hidden" aria-labelledby="completed-tasks-title">
             <header class="mb-5">
                 <h2 id="completed-tasks-title" class="text-xl font-bold text-gray">
                     تسک‌های انجام شده

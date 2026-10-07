@@ -23,6 +23,7 @@ const doneList = document.getElementById("done-list");
 const todoCountText = document.getElementById("todo-count");
 const doneCountText = document.getElementById("done-count");
 const emptyState = document.getElementById("empty-state");
+const topArea = document.getElementById("top-area");
 const doneSection = document.getElementById("done-section");
 
 // note: بخش تگ ها (اولویت) در فرم
@@ -139,13 +140,21 @@ function openTaskForm(isEdit, task) {
         card.classList.add("hidden");
     } else {
         submitButton.textContent = "اضافه کردن تسک";
+
+        // note: اگر عکس «چه کارهایی امروز...» دیده می شود، ارتفاع بالای صفحه ثابت می ماند
+        // note: و عکس برداشته می شود، تا تسک های انجام شده تکان نخورد
+        if (!emptyState.classList.contains("hidden")) {
+            topArea.style.minHeight = topArea.offsetHeight + "px";
+            emptyState.classList.add("hidden");
+        }
+
+        // note: فقط موقع ساختن تسک، کل بخش دکمه ی افزودن مخفی می شود (فرم جای آن باز می شود)
+        // note: (فقط دکمه نه، وگرنه بخش خالی فاصله ی اضافه می سازد)
+        addTaskSection.classList.add("hidden");
     }
 
     updateSubmitButton();
 
-    // note: وقتی فرم باز است، کل بخش دکمه ی افزودن مخفی می شود
-    // note: (فقط دکمه نه، وگرنه بخش خالی فاصله ی اضافه می سازد)
-    addTaskSection.classList.add("hidden");
     // note: دکمه ی ضربدر برای بستن فرم بدون ثبت
     cancelButton.classList.remove("hidden");
     createTaskSection.classList.remove("hidden");
@@ -245,7 +254,7 @@ function updateTaskCount() {
     if (todoCount > 0) {
         todoCountText.textContent = `${todoNumber} تسک را باید انجام بدهید.`;
     } else {
-        todoCountText.textContent = "تسکی برای انجام وجود ندارد.";
+        todoCountText.textContent = "تسکی برای امروز نداری!";
     }
     doneCountText.textContent = `${doneNumber} تسک انجام شده است.`;
 
@@ -463,6 +472,11 @@ function closeEditTask() {
     createTaskSection.classList.add("hidden");
     // note: بعد از بسته شدن فرم، دکمه ی افزودن دوباره نشان داده می شود
     addTaskSection.classList.remove("hidden");
+    // note: ارتفاع بالای صفحه آزاد می شود و اگر تسکی نیست، عکس دوباره دیده می شود
+    topArea.style.minHeight = "";
+    if (todoList.children.length === 0) {
+        emptyState.classList.remove("hidden");
+    }
 }
 
 // note: 27. آپدیت تسک
