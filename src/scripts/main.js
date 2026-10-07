@@ -42,25 +42,7 @@ const priorities = {
 
 
 // note: local storage
-function setData(key, value) {
-    localStorage.setItem(key, value);
-}
-
-function getData(key) {
-    const data = localStorage.getItem(key);
-    return data;
-}
-
-// info: جهت تست؛ فعلاً در پروژه استفاده نمی شود
-function removeData(key) {
-    localStorage.removeItem(key);
-}
-
-// info: جهت تست؛ فعلاً در پروژه استفاده نمی شود
-// note: کل localStorage (حتی داده ی پروژه های دیگر روی localhost) را پاک می کند
-function clearData() {
-    localStorage.clear()
-}
+// note: setData و getData و توابع تم در theme.js هستند (داخل head لود می شود)
 
 // note: اسم مخصوص این پروژه، تا با داده ی پروژه های دیگه روی localhost قاطی نشه
 const tasksKey = "todolist-quera-tasks";
@@ -77,21 +59,6 @@ function loadTasks() {
         tasks = JSON.parse(data);
     }
 }
-
-// note: ذخیره ی تم
-function saveTheme(themeMode) {
-    setData("theme", themeMode);
-}
-
-// note: خواندن تم
-function loadTheme() {
-    let themeMode = getData("theme");
-    if (themeMode === null) {
-        themeMode = "light";
-    }
-    toggleTheme(themeMode);
-}
-
 
 // note: Create Task
 
@@ -572,14 +539,6 @@ function toggleMobileSidebar() {
     aside.classList.toggle("translate-x-full");
 }
 
-// note: theme mode
-function toggleTheme(themeMode) {
-    const htmlElement = document.documentElement;
-    htmlElement.setAttribute("class", themeMode);
-    saveTheme(themeMode);
-}
-
-
 // note: datetime
 function updateClock() {
     const date = new Date();
@@ -602,8 +561,7 @@ function updateClock() {
 }
 
 
-// note: on load
-loadTheme();
+// note: on load (تم قبلاً در theme.js اعمال شده است)
 loadTasks();
 renderTasks();
 updateClock();
