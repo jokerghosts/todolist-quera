@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <script src="./src/scripts/theme.js"></script>
+
+    <link rel="stylesheet" href="./src/style/main.css"/>
+
+    <!-- Tailwind CDN only reads inline text/tailwindcss blocks, so @theme stays here -->
+    <style type="text/tailwindcss">
+        @custom-variant dark (&:where(.dark, .dark *));
+        @theme {
+            --font-yekan: "YekanBakh", sans-serif;
+            --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+            --color-background: var(--background);
+            --color-blue: var(--blue);
+            --color-gray: var(--gray);
+            --color-gray-light: var(--gray-light);
+            --color-yellow: var(--yellow);
+            --color-orange: var(--orange);
+            --color-turquoise: var(--turquoise);
+
+            --color-blue-light: var(--blue-light);
+            --color-yellow-light: var(--yellow-light);
+            --color-orange-light: var(--orange-light);
+            --color-turquoise-light: var(--turquoise-light);
+
+            /* aside color var added down */
+            --color-profile-desc: var(--profile-desc);
+            --color-sidebar-bg: var(--sidebar-bg);
+            --color-button-bg: var(--button-bg);
+            --color-chosen-theme-bg: var(--chosen-theme_button-bg);
+            --color-menubar-bg: var(--menubar-bg);
+            --color-divider: var(--divider);
+            --color-overlay: var(--overlay);
+
+            /* note: رنگ های بخش تسک ها (طبق فیگما) */
+            --color-card: var(--card-bg);
+            --color-card-border: var(--card-border);
+            --color-dashed-border: var(--dashed-border);
+            --color-menu-bg: var(--menu-bg);
+            --color-box-border: var(--box-border);
+            --color-submit-bg: var(--submit-bg);
+            --color-check: var(--check);
+            --color-done-icon: var(--done-icon);
+
+            /* aside color var added up */
+            --radius-8: 8px;
+            --radius-12: 12px;
+            --radius-16: 16px;
+            --font-weight-normal: 400;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --font-weight-extrabold: 800;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <title>To-Do List</title>
+</head>
+<body
+        class="min-h-screen font-yekan grid grid-cols-1 md:grid-cols-[272px_1fr] bg-background text-gray gap-4"
+>
+<aside class="hidden md:fixed md:top-[34px] md:right-4 md:bottom-[34px] md:z-40 md:flex md:w-[272px] md:flex-col md:overflow-hidden rounded-16 bg-sidebar-bg px-4 pb-6 pt-0 shadow-card">
+    <div class="flex shrink-0 items-start gap-2 my-10 pr-4">
+        <img
+                src="./src/assets/images/Ellipse 136.png"
+                class="rounded-full size-14"
+                alt="profile_photo"
+        />
+        <div class="flex flex-col">
+            <h2 class="font-bold text-lg">سلام، رویا</h2>
+            <p id="today-date" class="text-sm text-profile-desc font-bold">
+                امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲
+            </p>
+        </div>
+    </div>
+    <nav class="sidebar-nav">
+        <ul class="flex flex-col gap-3">
+            <li class="nav-item">
+                <svg
+                        width="17"
+                        height="17"
+                        viewBox="0 0 17 17"
+                        fill="none"
+                >
+                    <path
+                            d="M15.0417 4.01478L10.2417 0.65645C8.93333 -0.260216 6.925 -0.210216 5.66667 0.764784L1.49167 4.02312C0.658333 4.67312 0 6.00645 0 7.05645V12.8065C0 14.9315 1.725 16.6648 3.85 16.6648H12.8333C14.9583 16.6648 16.6833 14.9398 16.6833 12.8148V7.16478C16.6833 6.03978 15.9583 4.65645 15.0417 4.01478ZM8.96667 13.3315C8.96667 13.6731 8.68333 13.9565 8.34167 13.9565C8 13.9565 7.71667 13.6731 7.71667 13.3315V10.8315C7.71667 10.4898 8 10.2065 8.34167 10.2065C8.68333 10.2065 8.96667 10.4898 8.96667 10.8315V13.3315Z"
+                            fill="currentColor"
+                    />
+                </svg>
+
+                <span class="font-bold">خانه</span>
+            </li>
+            <li class="nav-item">
+                <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                >
+                    <path
+                            d="M10.3086 7.40002H14.6836"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M5.31641 7.40002L5.94141 8.02502L7.81641 6.15002"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M10.3086 13.2333H14.6836"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M5.31641 13.2333L5.94141 13.8583L7.81641 11.9833"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M7.49935 18.3334H12.4993C16.666 18.3334 18.3327 16.6667 18.3327 12.5V7.50002C18.3327 3.33335 16.666 1.66669 12.4993 1.66669H7.49935C3.33268 1.66669 1.66602 3.33335 1.66602 7.50002V12.5C1.66602 16.6667 3.33268 18.3334 7.49935 18.3334Z"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                </svg>
+
+                <span class="font-bold">تسک ها</span>
+            </li>
+            <li class="nav-item">
+                <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                >
+                    <path
+                            d="M6.66699 1.66669V4.16669"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M13.333 1.66669V4.16669"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M2.91699 7.57501H17.0837"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M17.5 7.08335V14.1667C17.5 16.6667 16.25 18.3334 13.3333 18.3334H6.66667C3.75 18.3334 2.5 16.6667 2.5 14.1667V7.08335C2.5 4.58335 3.75 2.91669 6.66667 2.91669H13.3333C16.25 2.91669 17.5 4.58335 17.5 7.08335Z"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M13.0791 11.4167H13.0866"
+                            stroke="currentColor"
+                            stroke-width="1.66667"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M13.0791 13.9167H13.0866"
+                            stroke="currentColor"
+                            stroke-width="1.66667"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M9.99607 11.4167H10.0036"
+                            stroke="currentColor"
+                            stroke-width="1.66667"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M9.99607 13.9167H10.0036"
+                            stroke="currentColor"
+                            stroke-width="1.66667"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M6.91209 11.4167H6.91957"
+                            stroke="currentColor"
+                            stroke-width="1.66667"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M6.91209 13.9167H6.91957"
+                            stroke="currentColor"
+                            stroke-width="1.66667"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                </svg>
+
+                <span class="font-bold">تقویم</span>
+            </li>
+            <li class="nav-item">
+                <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                >
+                    <path
+                            d="M7.49935 18.3334H12.4993C16.666 18.3334 18.3327 16.6667 18.3327 12.5V7.50002C18.3327 3.33335 16.666 1.66669 12.4993 1.66669H7.49935C3.33268 1.66669 1.66602 3.33335 1.66602 7.50002V12.5C1.66602 16.6667 3.33268 18.3334 7.49935 18.3334Z"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M8.48255 14.2916L5.94922 11.7583"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M8.48242 5.70831V14.2916"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M11.5176 5.70831L14.0509 8.24165"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M11.5176 14.2916V5.70831"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                </svg>
+
+                <span class="font-bold">گزارشات</span>
+            </li>
+            <li class="nav-item">
+                <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                >
+                    <path
+                            d="M2.5 7.59169V12.4C2.5 14.1667 2.5 14.1667 4.16667 15.2917L8.75 17.9417C9.44167 18.3417 10.5667 18.3417 11.25 17.9417L15.8333 15.2917C17.5 14.1667 17.5 14.1667 17.5 12.4084V7.59169C17.5 5.83336 17.5 5.83336 15.8333 4.70836L11.25 2.05836C10.5667 1.65836 9.44167 1.65836 8.75 2.05836L4.16667 4.70836C2.5 5.83336 2.5 5.83336 2.5 7.59169Z"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                </svg>
+
+                <span class="font-bold">تنظیمات</span>
+            </li>
+            <li class="nav-item">
+                <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                >
+                    <path
+                            d="M15 15.7166H14.3667C13.7 15.7166 13.0667 15.975 12.6 16.4416L11.175 17.85C10.525 18.4917 9.46667 18.4917 8.81667 17.85L7.39166 16.4416C6.925 15.975 6.28333 15.7166 5.625 15.7166H5C3.61667 15.7166 2.5 14.6083 2.5 13.2417V4.14996C2.5 2.7833 3.61667 1.67499 5 1.67499H15C16.3833 1.67499 17.5 2.7833 17.5 4.14996V13.2417C17.5 14.6 16.3833 15.7166 15 15.7166Z"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-miterlimit="10"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M5.83301 7.63336C5.83301 6.85836 6.46634 6.22498 7.24134 6.22498C8.01634 6.22498 8.64968 6.85836 8.64968 7.63336C8.64968 9.20003 6.42467 9.36669 5.933 10.8584C5.833 11.1667 6.09134 11.475 6.41634 11.475H8.64968"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M13.3665 11.4667V6.70838C13.3665 6.49171 13.2248 6.3 13.0165 6.24166C12.8081 6.18333 12.5831 6.26666 12.4665 6.45C11.8665 7.41666 11.2165 8.51667 10.6498 9.48334C10.5581 9.64167 10.5581 9.85001 10.6498 10.0083C10.7415 10.1667 10.9165 10.2666 11.1081 10.2666H14.1665"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                </svg>
+
+                <span class="font-bold">پشتیبانی</span>
+            </li>
+            <li class="nav-item">
+                <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                >
+                    <path
+                            d="M10.1341 9.05835C10.0508 9.05002 9.95078 9.05002 9.85911 9.05835C7.87578 8.99169 6.30078 7.36669 6.30078 5.36669C6.30078 3.32502 7.95078 1.66669 10.0008 1.66669C12.0424 1.66669 13.7008 3.32502 13.7008 5.36669C13.6924 7.36669 12.1174 8.99169 10.1341 9.05835Z"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M5.96758 12.1333C3.95091 13.4833 3.95091 15.6833 5.96758 17.025C8.25924 18.5583 12.0176 18.5583 14.3092 17.025C16.3259 15.675 16.3259 13.475 14.3092 12.1333C12.0259 10.6083 8.26758 10.6083 5.96758 12.1333Z"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                </svg>
+
+                <span class="font-bold">پروفایل</span>
+            </li>
+        </ul>
+    </nav>
+    <div class="sidebar-footer">
+        <div class="mx-4 flex h-[42px] items-center gap-1 rounded-8 bg-button-bg p-1">
+            <button
+                    id="light-btn"
+                    type="button"
+                    onclick="toggleTheme('light')"
+                    class="theme-btn flex h-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-8 bg-chosen-theme-bg dark:bg-transparent"
+            >
+                <svg class="w-5 shrink-0" viewBox="0 0 16 16" fill="none">
+                    <path d="M8.00033 12.3333C10.3936 12.3333 12.3337 10.3932 12.3337 7.99996C12.3337 5.60673 10.3936 3.66663 8.00033 3.66663C5.60709 3.66663 3.66699 5.60673 3.66699 7.99996C3.66699 10.3932 5.60709 12.3333 8.00033 12.3333Z"
+                          stroke="currentColor" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12.7597 12.76L12.673 12.6734M12.673 3.32671L12.7597 3.24004L12.673 3.32671ZM3.23967 12.76L3.32634 12.6734L3.23967 12.76ZM7.99967 1.38671V1.33337V1.38671ZM7.99967 14.6667V14.6134V14.6667ZM1.38634 8.00004H1.33301H1.38634ZM14.6663 8.00004H14.613H14.6663ZM3.32634 3.32671L3.23967 3.24004L3.32634 3.32671Z"
+                          stroke="currentColor" stroke-width="1.55556" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>روشن</span>
+            </button>
+
+            <button id="dark-btn" type="button" onclick="toggleTheme('dark')"
+                    class="theme-btn flex h-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-8 dark:bg-chosen-theme-bg">
+                <svg class="w-5 shrink-0" viewBox="0 0 16 16" fill="none">
+                    <path d="M1.35307 8.27997C1.59307 11.7133 4.5064 14.5066 7.99307 14.66C10.4531 14.7666 12.6531 13.62 13.9731 11.8133C14.5197 11.0733 14.2264 10.58 13.3131 10.7466C12.8664 10.8266 12.4064 10.86 11.9264 10.84C8.6664 10.7066 5.99973 7.97997 5.9864 4.75997C5.97973 3.89331 6.15973 3.07331 6.4864 2.32664C6.8464 1.49997 6.41307 1.10664 5.57973 1.45997C2.93973 2.57331 1.13307 5.23331 1.35307 8.27997Z"
+                          stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>تاریک</span>
+            </button>
+        </div>
+        <div class="mx-4 h-px bg-divider"></div>
+        <button type="button" class="logout-btn w-full">
+            <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+            >
+                <path
+                        d="M7.41699 6.29995C7.67533 3.29995 9.21699 2.07495 12.592 2.07495H12.7003C16.4253 2.07495 17.917 3.56662 17.917 7.29162V12.725C17.917 16.45 16.4253 17.9416 12.7003 17.9416H12.592C9.24199 17.9416 7.70033 16.7333 7.42533 13.7833"
+                        stroke="currentColor"
+                        stroke-width="1.25"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                />
+                <path
+                        d="M12.4999 10H3.0166"
+                        stroke="currentColor"
+                        stroke-width="1.25"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                />
+                <path
+                        d="M4.87467 7.20837L2.08301 10L4.87467 12.7917"
+                        stroke="currentColor"
+                        stroke-width="1.25"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                />
+            </svg>
+
+            <p>خروج</p>
+        </button>
+    </div>
+</aside>
+
+<!-- note: منوی موبایل؛ بسته: نامرئی و بیرون از صفحه، باز: از سمت راست وارد می شود -->
+<div id="mobile-sidebar" class="invisible fixed inset-0 z-50 transition-[visibility] duration-300 md:hidden">
+    <div id="mobile-overlay" class="absolute inset-0 bg-overlay opacity-0 transition-opacity duration-300"></div>
+    <aside id="mobile-aside"
+           class="absolute inset-y-0 right-0 flex w-[274px] translate-x-full flex-col bg-sidebar-bg px-4 py-6 transition-transform duration-300">
+        <div class="relative flex h-8 shrink-0 items-center justify-center">
+            <button type="button" class="absolute left-0 cursor-pointer p-1 hover:text-blue" aria-label="بستن"
+                    onclick="toggleMobileSidebar()">
+                <svg class="h-5 w-5" viewBox="0 0 22 22" fill="none">
+                    <path d="M5.5 5.5L11 11M11 11L16.5 16.5M11 11L16.5 5.5M11 11L5.5 16.5" stroke="currentColor"
+                          stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <p class="text-base font-bold">کوئرا لیست</p>
+        </div>
+
+        <nav class="sidebar-nav mt-12">
+            <ul class="flex flex-col gap-3">
+                <li class="nav-item">
+                    <svg class="h-5 w-5 shrink-0"
+                         width="17"
+                         height="17"
+                         viewBox="0 0 17 17"
+                         fill="none"
+                    >
+                        <path
+                                d="M15.0417 4.01478L10.2417 0.65645C8.93333 -0.260216 6.925 -0.210216 5.66667 0.764784L1.49167 4.02312C0.658333 4.67312 0 6.00645 0 7.05645V12.8065C0 14.9315 1.725 16.6648 3.85 16.6648H12.8333C14.9583 16.6648 16.6833 14.9398 16.6833 12.8148V7.16478C16.6833 6.03978 15.9583 4.65645 15.0417 4.01478ZM8.96667 13.3315C8.96667 13.6731 8.68333 13.9565 8.34167 13.9565C8 13.9565 7.71667 13.6731 7.71667 13.3315V10.8315C7.71667 10.4898 8 10.2065 8.34167 10.2065C8.68333 10.2065 8.96667 10.4898 8.96667 10.8315V13.3315Z"
+                                fill="currentColor"
+                        />
+                    </svg>
+                    <span class="font-bold">خانه</span>
+                </li>
+                <li class="nav-item">
+                    <svg class="h-5 w-5 shrink-0"
+                         width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                    >
+                        <path
+                                d="M10.3086 7.40002H14.6836"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M5.31641 7.40002L5.94141 8.02502L7.81641 6.15002"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M10.3086 13.2333H14.6836"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M5.31641 13.2333L5.94141 13.8583L7.81641 11.9833"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M7.49935 18.3334H12.4993C16.666 18.3334 18.3327 16.6667 18.3327 12.5V7.50002C18.3327 3.33335 16.666 1.66669 12.4993 1.66669H7.49935C3.33268 1.66669 1.66602 3.33335 1.66602 7.50002V12.5C1.66602 16.6667 3.33268 18.3334 7.49935 18.3334Z"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span class="font-bold">تسک ها</span>
+                </li>
+                <li class="nav-item">
+                    <svg class="h-5 w-5 shrink-0"
+                         width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                    >
+                        <path
+                                d="M6.66699 1.66669V4.16669"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M13.333 1.66669V4.16669"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M2.91699 7.57501H17.0837"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M17.5 7.08335V14.1667C17.5 16.6667 16.25 18.3334 13.3333 18.3334H6.66667C3.75 18.3334 2.5 16.6667 2.5 14.1667V7.08335C2.5 4.58335 3.75 2.91669 6.66667 2.91669H13.3333C16.25 2.91669 17.5 4.58335 17.5 7.08335Z"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M13.0791 11.4167H13.0866"
+                                stroke="currentColor"
+                                stroke-width="1.66667"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M13.0791 13.9167H13.0866"
+                                stroke="currentColor"
+                                stroke-width="1.66667"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M9.99607 11.4167H10.0036"
+                                stroke="currentColor"
+                                stroke-width="1.66667"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M9.99607 13.9167H10.0036"
+                                stroke="currentColor"
+                                stroke-width="1.66667"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M6.91209 11.4167H6.91957"
+                                stroke="currentColor"
+                                stroke-width="1.66667"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M6.91209 13.9167H6.91957"
+                                stroke="currentColor"
+                                stroke-width="1.66667"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span class="font-bold">تقویم</span>
+                </li>
+                <li class="nav-item">
+                    <svg class="h-5 w-5 shrink-0"
+                         width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                    >
+                        <path
+                                d="M7.49935 18.3334H12.4993C16.666 18.3334 18.3327 16.6667 18.3327 12.5V7.50002C18.3327 3.33335 16.666 1.66669 12.4993 1.66669H7.49935C3.33268 1.66669 1.66602 3.33335 1.66602 7.50002V12.5C1.66602 16.6667 3.33268 18.3334 7.49935 18.3334Z"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M8.48255 14.2916L5.94922 11.7583"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M8.48242 5.70831V14.2916"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M11.5176 5.70831L14.0509 8.24165"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M11.5176 14.2916V5.70831"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span class="font-bold">گزارشات</span>
+                </li>
+                <li class="nav-item">
+                    <svg class="h-5 w-5 shrink-0"
+                         width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                    >
+                        <path
+                                d="M2.5 7.59169V12.4C2.5 14.1667 2.5 14.1667 4.16667 15.2917L8.75 17.9417C9.44167 18.3417 10.5667 18.3417 11.25 17.9417L15.8333 15.2917C17.5 14.1667 17.5 14.1667 17.5 12.4084V7.59169C17.5 5.83336 17.5 5.83336 15.8333 4.70836L11.25 2.05836C10.5667 1.65836 9.44167 1.65836 8.75 2.05836L4.16667 4.70836C2.5 5.83336 2.5 5.83336 2.5 7.59169Z"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span class="font-bold">تنظیمات</span>
+                </li>
+                <li class="nav-item">
+                    <svg class="h-5 w-5 shrink-0"
+                         width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                    >
+                        <path
+                                d="M15 15.7166H14.3667C13.7 15.7166 13.0667 15.975 12.6 16.4416L11.175 17.85C10.525 18.4917 9.46667 18.4917 8.81667 17.85L7.39166 16.4416C6.925 15.975 6.28333 15.7166 5.625 15.7166H5C3.61667 15.7166 2.5 14.6083 2.5 13.2417V4.14996C2.5 2.7833 3.61667 1.67499 5 1.67499H15C16.3833 1.67499 17.5 2.7833 17.5 4.14996V13.2417C17.5 14.6 16.3833 15.7166 15 15.7166Z"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-miterlimit="10"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M5.83301 7.63336C5.83301 6.85836 6.46634 6.22498 7.24134 6.22498C8.01634 6.22498 8.64968 6.85836 8.64968 7.63336C8.64968 9.20003 6.42467 9.36669 5.933 10.8584C5.833 11.1667 6.09134 11.475 6.41634 11.475H8.64968"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M13.3665 11.4667V6.70838C13.3665 6.49171 13.2248 6.3 13.0165 6.24166C12.8081 6.18333 12.5831 6.26666 12.4665 6.45C11.8665 7.41666 11.2165 8.51667 10.6498 9.48334C10.5581 9.64167 10.5581 9.85001 10.6498 10.0083C10.7415 10.1667 10.9165 10.2666 11.1081 10.2666H14.1665"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span class="font-bold">پشتیبانی</span>
+                </li>
+                <li class="nav-item">
+                    <svg class="h-5 w-5 shrink-0"
+                         width="20"
+                         height="20"
+                         viewBox="0 0 20 20"
+                         fill="none"
+                    >
+                        <path
+                                d="M10.1341 9.05835C10.0508 9.05002 9.95078 9.05002 9.85911 9.05835C7.87578 8.99169 6.30078 7.36669 6.30078 5.36669C6.30078 3.32502 7.95078 1.66669 10.0008 1.66669C12.0424 1.66669 13.7008 3.32502 13.7008 5.36669C13.6924 7.36669 12.1174 8.99169 10.1341 9.05835Z"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                        <path
+                                d="M5.96758 12.1333C3.95091 13.4833 3.95091 15.6833 5.96758 17.025C8.25924 18.5583 12.0176 18.5583 14.3092 17.025C16.3259 15.675 16.3259 13.475 14.3092 12.1333C12.0259 10.6083 8.26758 10.6083 5.96758 12.1333Z"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                        />
+                    </svg>
+                    <span class="font-bold">پروفایل</span>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="flex h-[42px] w-full items-center gap-1 rounded-8 bg-button-bg p-1">
+                <button
+                        type="button"
+                        onclick="toggleTheme('light')"
+                        class="theme-btn flex h-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-8 bg-chosen-theme-bg text-sm dark:bg-transparent"
+                >
+                    <svg class="h-5 w-5" viewBox="0 0 16 16" fill="none">
+                        <path d="M8.00033 12.3333C10.3936 12.3333 12.3337 10.3932 12.3337 7.99996C12.3337 5.60673 10.3936 3.66663 8.00033 3.66663C5.60709 3.66663 3.66699 5.60673 3.66699 7.99996C3.66699 10.3932 5.60709 12.3333 8.00033 12.3333Z"
+                              stroke="currentColor" stroke-width="1.16667" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path d="M12.7597 12.76L12.673 12.6734M12.673 3.32671L12.7597 3.24004L12.673 3.32671ZM3.23967 12.76L3.32634 12.6734L3.23967 12.76ZM7.99967 1.38671V1.33337V1.38671ZM7.99967 14.6667V14.6134V14.6667ZM1.38634 8.00004H1.33301H1.38634ZM14.6663 8.00004H14.613H14.6663ZM3.32634 3.32671L3.23967 3.24004L3.32634 3.32671Z"
+                              stroke="currentColor" stroke-width="1.55556" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                    <span>روشن</span>
+                </button>
+                <button
+                        type="button"
+                        onclick="toggleTheme('dark')"
+                        class="theme-btn flex h-full flex-1 cursor-pointer items-center justify-center gap-2 rounded-8 text-sm dark:bg-chosen-theme-bg"
+                >
+                    <svg class="h-5 w-5" viewBox="0 0 16 16" fill="none">
+                        <path d="M1.35307 8.27997C1.59307 11.7133 4.5064 14.5066 7.99307 14.66C10.4531 14.7666 12.6531 13.62 13.9731 11.8133C14.5197 11.0733 14.2264 10.58 13.3131 10.7466C12.8664 10.8266 12.4064 10.86 11.9264 10.84C8.6664 10.7066 5.99973 7.97997 5.9864 4.75997C5.97973 3.89331 6.15973 3.07331 6.4864 2.32664C6.8464 1.49997 6.41307 1.10664 5.57973 1.45997C2.93973 2.57331 1.13307 5.23331 1.35307 8.27997Z"
+                              stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <span>تاریک</span>
+                </button>
+            </div>
+            <div class="h-px w-full bg-divider"></div>
+            <button type="button" class="logout-btn w-full">
+                <svg class="h-5 w-5 shrink-0"
+                     width="20"
+                     height="20"
+                     viewBox="0 0 20 20"
+                     fill="none"
+                >
+                    <path
+                            d="M7.41699 6.29995C7.67533 3.29995 9.21699 2.07495 12.592 2.07495H12.7003C16.4253 2.07495 17.917 3.56662 17.917 7.29162V12.725C17.917 16.45 16.4253 17.9416 12.7003 17.9416H12.592C9.24199 17.9416 7.70033 16.7333 7.42533 13.7833"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M12.4999 10H3.0166"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                    <path
+                            d="M4.87467 7.20837L2.08301 10L4.87467 12.7917"
+                            stroke="currentColor"
+                            stroke-width="1.25"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                    />
+                </svg>
+                <span>خروج</span>
+            </button>
+        </div>
+    </aside>
+</div>
+<div
+        class="row-start-1 flex flex-col md:col-start-2 p-4 md:pt-8 gap-4"
+>
+    <div
+            class="flex md:hidden bg-menubar-bg h-10 items-center shadow-card rounded-8 px-5"
+    >
+        <svg
+                onclick="toggleMobileSidebar()"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                class="cursor-pointer hover:text-blue"
+        >
+            <path
+                    d="M3 7H21"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+            />
+            <path
+                    d="M3 12H21"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+            />
+            <path
+                    d="M3 17H21"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+            />
+        </svg>
+
+        <p class="font-bold flex-1 text-center">کوئرا لیست</p>
+    </div>
+    <div class="flex md:hidden items-start gap-2 mt-3 mb-6">
+        <img
+                src="./src/assets/images/Ellipse 136.png"
+                class="rounded-full size-14"
+                alt="profile_photo"
+        />
+        <div class="flex flex-col">
+            <h2 class="font-bold text-lg">سلام، رویا</h2>
+            <p id="today-date-mobile" class="text-sm text-profile-desc font-bold">
+                امروز، سه‌شنبه، ۵ بهمن ۱۴۰۲
+            </p>
+        </div>
+    </div>
+    <header class="mx-auto flex w-full max-w-3xl flex-col m-2 md:mt-10">
+        <h2 class="font-bold text-base md:text-xl">تسک های امروز</h2>
+        <p id="todo-count" class="text-xs text-profile-desc">تسکی برای امروز نداری!</p>
+    </header>
+    <main class="mx-auto flex w-full max-w-3xl flex-col gap-8">
+        <!-- note: بالای صفحه؛ اگر تسکی نیست، فرم ساختن روی دکمه و عکس باز می شود (relative برای همین است) -->
+        <div id="top-area" class="relative flex flex-col gap-8">
+            <section id="add-task-section" aria-label="افزودن تسک">
+                <button
+                        type="button"
+                        id="addNewTask"
+                        onclick="toggleCreateTaskDropdown()"
+                        class="flex min-h-12 w-full items-center cursor-pointer gap-3 rounded-12 border border-dashed border-dashed-border bg-card px-4 text-blue transition-colors hover:border-blue hover:bg-blue-light"
+                >
+                    <svg class="size-7" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M6 12H18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path d="M12 18V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+
+                    <span class="font-semibold">افزودن وظیفه جدید</span>
+                </button>
+            </section>
+            <section
+                    id="create-task-section"
+                    class="hidden overflow-hidden shadow-sm rounded-12 border border-gray-light/30 bg-background"
+                    aria-label="اضافه کردن تسک جدید"
+            >
+                <form id="task-form" class="mt-0 ">
+                    <div class="flex flex-col p-5">
+                        <input
+                                type="text"
+                                name="task-title"
+                                placeholder="نام تسک"
+                                class="w-full border-none text-base font-semibold text-gray outline-none placeholder:text-gray-light placeholder:opacity-100"
+                        />
+
+                        <textarea name="task-description" rows="2" placeholder="توضیحات"
+                                  class="mt-3 w-full resize-none border-none text-sm leading-7 text-profile-desc outline-none placeholder:text-profile-desc placeholder:opacity-100"></textarea>
+
+                        <div class="mt-3">
+                            <!-- note: دکمه ی تگ ها، باکس اولویت ها را باز و بسته می کند -->
+                            <button
+                                    type="button"
+                                    id="tags-btn"
+                                    onclick="toggleTagsBox()"
+                                    class="flex w-fit cursor-pointer items-center gap-2 rounded-8 border border-gray-light/60 px-3 py-2 text-xs md:text-sm text-gray-light transition-colors hover:border-gray hover:text-gray"
+                            >
+                                <svg id="tags-svg" class="size-4 -rotate-90 transition-transform" viewBox="0 0 16 20"
+                                     aria-hidden="true">
+                                    <path
+                                            id="tags-icon"
+                                            d="M15.46 2.48v9.54c0 .56-.39 1.27-.88 1.57l-5.56 3.48c-.54.34-1.39.3-1.9-.08l-5.75-4.32c-.41-.3-.74-.97-.74-1.48V2.48C.63 1.02 2.23.14 3.47.91l3.69 2.31c.49.3 1.29.3 1.78 0L12.63.91c1.23-.77 2.83.12 2.83 1.57Z"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="1.25"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                    />
+                                </svg>
+
+                                <span>تگ‌ها</span>
+                            </button>
+
+                            <!-- note: باکس اولویت ها (اول مخفی است) -->
+                            <div
+                                    id="tags-box"
+                                    class="hidden mt-5 flex w-fit items-center gap-3 rounded-8 border border-box-border bg-menu-bg p-2"
+                            >
+                                <button
+                                        type="button"
+                                        id="priority-low"
+                                        onclick="selectPriority('low')"
+                                        class="cursor-pointer rounded-8 bg-turquoise-light px-4 py-1.5 text-xs md:text-sm font-semibold text-turquoise"
+                                >
+                                    پایین
+                                </button>
+
+                                <span class="h-5 w-px bg-box-border"></span>
+
+                                <button
+                                        type="button"
+                                        id="priority-medium"
+                                        onclick="selectPriority('medium')"
+                                        class="cursor-pointer rounded-8 bg-yellow/20 px-4 py-1.5 text-xs md:text-sm font-semibold text-yellow"
+                                >
+                                    متوسط
+                                </button>
+
+                                <span class="h-5 w-px bg-box-border"></span>
+
+                                <button
+                                        type="button"
+                                        id="priority-high"
+                                        onclick="selectPriority('high')"
+                                        class="cursor-pointer rounded-8 bg-orange/20 px-4 py-1.5 text-xs md:text-sm font-semibold text-orange"
+                                >
+                                    بالا
+                                </button>
+                            </div>
+
+                            <!-- note: اولویت انتخاب شده، با ضربدر هم رنگ متن -->
+                            <div id="selected-priority" class="hidden">
+                                <!-- note: ضربدر اول آمده تا در راست به چپ، سمت راست متن باشد -->
+                                <button
+                                        type="button"
+                                        onclick="removePriority()"
+                                        aria-label="حذف اولویت"
+                                        class="grid cursor-pointer place-items-center"
+                                >
+                                    <svg class="size-3" viewBox="0 0 12 12" fill="none">
+                                        <path d="M2 2L10 10M10 2L2 10" stroke="currentColor" stroke-width="1.5"
+                                              stroke-linecap="round"/>
+                                    </svg>
+                                </button>
+                                <span id="selected-priority-label"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                            class="flex justify-end gap-3 border-t border-gray-light/30 px-5 py-4"
+                    >
+                        <!-- note: دکمه ی ضربدر برای بستن فرم -->
+                        <button
+                                type="button"
+                                id="cancel-edit-btn"
+                                onclick="closeEditTask()"
+                                aria-label="بستن فرم"
+                                class="hidden grid size-10 cursor-pointer place-items-center rounded-8 bg-button-bg text-gray transition-opacity hover:opacity-70"
+                        >
+                            <svg class="size-4" viewBox="0 0 14 14" fill="none">
+                                <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.5"
+                                      stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                        <button
+                                type="submit"
+                                id="task-form-submit"
+                                disabled
+                                class="cursor-pointer rounded-8 bg-submit-bg px-5 py-2.5 text-xs md:text-sm font-semibold text-white transition-opacity enabled:hover:opacity-60 disabled:cursor-not-allowed disabled:opacity-40"
+                        >
+                            اضافه کردن تسک
+                        </button>
+                    </div>
+                </form>
+            </section>
+            <div id="todo-list" class="flex flex-col gap-4"></div>
+
+            <section
+                    id="empty-state"
+                    aria-label="تسک‌های امروز خالی است"
+                    class="flex flex-col items-center justify-center py-12 text-center"
+            >
+                <img
+                        src="./src/assets/images/2143202_Artboard 1.png"
+                        alt="تصویر لیست تسک‌های خالی"
+                        class="mb-6 w-full max-w-64 object-contain"
+                />
+
+                <h2 class="text-lg font-bold text-gray">
+                    چه کارهایی امروز برای انجام داری؟
+                </h2>
+
+                <p class="mt-2 text-sm text-gray-light">
+                    می‌تونی الان تسک‌هاتو اینجا بنویسی و برنامه‌ریزی رو شروع کنی!
+                </p>
+            </section>
+        </div>
+
+        <!-- note: اول مخفی است؛ فقط وقتی تسک انجام شده باشد نمایش داده می شود -->
+        <section id="done-section" class="hidden" aria-labelledby="completed-tasks-title">
+            <header class="mb-5">
+                <h2 id="completed-tasks-title" class="text-base md:text-xl font-bold text-gray">
+                    تسک‌های انجام شده
+                </h2>
+
+                <p id="done-count" class="mt-2 text-xs text-profile-desc">۳ تسک انجام شده است.</p>
+            </header>
+
+            <div id="done-list" class="flex flex-col gap-4"></div>
+        </section>
+    </main>
+</div>
+
+<script src="./src/scripts/main.js"></script>
+</body>
+</html>
