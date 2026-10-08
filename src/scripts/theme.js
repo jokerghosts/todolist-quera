@@ -24,6 +24,13 @@ function clearData() {
 function toggleTheme(themeMode) {
     const htmlElement = document.documentElement;
     htmlElement.setAttribute("class", themeMode);
+
+    // note: موقع کلیک، رنگ ها آرام عوض می شوند و بعد از 300 میلی ثانیه کلاس برداشته می شود
+    htmlElement.classList.add("theme-transition");
+    setTimeout(function () {
+        htmlElement.classList.remove("theme-transition");
+    }, 300);
+
     saveTheme(themeMode);
 }
 
@@ -38,7 +45,8 @@ function loadTheme() {
     if (themeMode === null) {
         themeMode = "light";
     }
-    toggleTheme(themeMode);
+    // note: موقع باز شدن صفحه، تم بدون transition اعمال می شود تا پرش نداشته باشد
+    document.documentElement.setAttribute("class", themeMode);
 }
 
 

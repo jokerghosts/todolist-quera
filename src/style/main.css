@@ -156,6 +156,12 @@
     color: var(--gray);
 }
 
+/* note: موقع تغییر تم، رنگ ها آرام عوض می شوند (کلاس را theme.js اضافه می کند) */
+.theme-transition,
+.theme-transition * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, fill 0.3s ease, stroke 0.3s ease, filter 0.3s ease !important;
+}
+
 /* note: اسکرول بار: بدون فلش بالا و پایین، با پس زمینه ی شفاف */
 ::-webkit-scrollbar {
     width: 6px;
